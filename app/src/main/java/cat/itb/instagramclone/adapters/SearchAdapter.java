@@ -8,24 +8,18 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
-
 import java.util.List;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.models.Publication;
 
-public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.ViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
     List<Publication> publicationList;
-
-    public PublicationAdapter(List<Publication> publicationList) {
-        this.publicationList = publicationList;
-    }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.publicacion_home_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_publicacion_item, parent, false);
         return new ViewHolder(v);
     }
 
@@ -40,20 +34,14 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        MaterialButton nombre_usuario;
         ImageView imagen_publicacion;
-        MaterialButton num_likes_publicacion;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.nombre_usuario = itemView.findViewById(R.id.nombre_usuario_button);
-            imagen_publicacion = itemView.findViewById(R.id.imagen_publicacion);
-            num_likes_publicacion = itemView.findViewById(R.id.num_likes_button);
+            imagen_publicacion = itemView.findViewById(R.id.imagen_publicacion_search);
         }
 
         public void bindData(Publication p){
-            nombre_usuario.setText(p.getUser_propietario().getNombre_usuario());
-            imagen_publicacion.setImageResource(imagen_publicacion.getImageAlpha());
-            num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().size() + " usuarios");
+            imagen_publicacion.setImageResource(p.getImagen_publicacion().getImageAlpha());
         }
     }
 }
