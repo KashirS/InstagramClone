@@ -89,4 +89,5 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
         }
     }
+
 }
