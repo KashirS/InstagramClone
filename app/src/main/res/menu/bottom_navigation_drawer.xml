@@ -21,5 +21,6 @@
         android:id="@+id/profile_icon"
         android:enabled="true"
         android:title="Profile"
+        android:icon="@drawable/ic_action_name"
         />
 </menu>
