@@ -21,7 +21,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -36,6 +35,8 @@ public class LoginFragment extends Fragment {
         String usuario = preferencias.getString("user", "No existe la info.");
         String password = preferencias.getString("password", "No existe la info.");
 
+        //textView.setText(usuario)
+        //textView.setText(password)
     }
 
     private void guardarPreferencias(){
