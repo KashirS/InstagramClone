@@ -1,8 +1,10 @@
 package cat.itb.instagramclone.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -17,10 +19,12 @@ import cat.itb.instagramclone.R;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener{
+
     private TextInputEditText username;
     private TextInputEditText password;
     private MaterialButton login;
     private MaterialButton register;
+    private MaterialButton forgotPassword;
     private TextInputLayout userInput;
     private TextInputLayout passInput;
 
@@ -46,6 +50,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
         login.setOnClickListener(this);
         register.setOnClickListener(this);
+        forgotPassword.setOnClickListener(this);
 
         return v;
     }
@@ -84,4 +89,5 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
         }
     }
+
 }
