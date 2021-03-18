@@ -53,6 +53,7 @@
             android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp"
             app:boxBackgroundColor="@color/white"
+            app:passwordToggleEnabled="true"
             android:hint="Password"
             >
 
@@ -61,6 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text=""
+                android:inputType="textPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 />
         </com.google.android.material.textfield.TextInputLayout>

@@ -41,7 +41,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
 
         public void bindData(Publication p){
-            imagen_publicacion.setImageResource(p.getImagen_publicacion().getImageAlpha());
+            imagen_publicacion.setImageResource(p.getImagen_publicacion());
         }
     }
 }
