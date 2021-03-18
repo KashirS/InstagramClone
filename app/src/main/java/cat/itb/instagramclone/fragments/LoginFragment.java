@@ -50,10 +50,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         passInput = v.findViewById(R.id.user_password_login);
 
 
-        login.setOnClickListener(this);
-        register.setOnClickListener(this);
-        forgotPassword.setOnClickListener(this);
-
+        login.setOnClickListener(this::onClick);
+        register.setOnClickListener(this::onClick);
         return v;
     }
 
@@ -88,6 +86,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             passInput.setError("min 8 character");
             passInput.isEnabled();
         }else {
+            guardarPreferencias(usernameVerify, passwordVerify);
             Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
         }
     }
@@ -100,7 +99,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         //textView.setText(password)
     }
 
-    private void guardarPreferencias(){
+    private void guardarPreferencias(String user, String pass){
         SharedPreferences preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String usuario = "" ; //TextView.getText().toString();
         String password = ""; //TextView.getText().toString();
