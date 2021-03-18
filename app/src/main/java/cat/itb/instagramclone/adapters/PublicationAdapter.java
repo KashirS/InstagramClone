@@ -60,7 +60,8 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
             nombre_usuario.setText(p.getUser_propietario().getNombre_usuario());
             //imagen_publicacion.setImageResource(p.getImagen_publicacion());
             num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().size() + " usuarios");
-
+            nombre_usuario_2.setText(p.getUser_propietario().getNombre_usuario());
+            texto_usuario.setText(p.getTexto_publicacion());
         }
     }
 }

@@ -22,19 +22,19 @@ public class HomeViewModel extends ViewModel {
     };
 
     User[] users = {
-            new User(1, "Jorge", 1),
-            new User(2, "Kashir", 2),
-            new User(3, "Manolo", 3)
+            new User(1, "@jorge", 1),
+            new User(2, "@kashir", 2),
+            new User(3, "@manolo_33", 3)
     };
 
     Publication[] publicaciones = {
-            new Publication(1, new User(1, "Jorge", 1), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(2, new User(2, "Kashir", 2), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(3, new User(3, "Jorge2", 3), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(4, new User(4, "Kashir2" ,4), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(5, new User(5, "Jorge3", 5), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "Kashir3", 6), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(7, new User(7, "Pepe", 7), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
+            new Publication(1, new User(1, "@jorge", 1), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
+            new Publication(2, new User(2, "@kashir", 2), "El crack", Arrays.asList(users), 10, Arrays.asList(comentarios)),
+            new Publication(3, new User(3, "@jorge2", 3), "Postureo", Arrays.asList(users), 10, Arrays.asList(comentarios)),
+            new Publication(4, new User(4, "@kashir2" ,4), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
+            new Publication(5, new User(5, "@jorge3", 5), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
+            new Publication(6, new User(6, "@kashir3", 6), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
+            new Publication(7, new User(7, "@pepe", 7), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
     };
 
     public HomeViewModel() {
