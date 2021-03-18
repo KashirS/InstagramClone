@@ -47,7 +47,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         }
 
         public void bindData(Story s){
-            imagen_usuario.setImageResource(s.getUser_story().getImagen_usuario().getImageAlpha());
+            imagen_usuario.setImageResource(s.getUser_story().getImagen_usuario());
             nombre_usuario.setText(s.getUser_story().getNombre_usuario());
         }
     }

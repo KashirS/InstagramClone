@@ -52,6 +52,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
         login.setOnClickListener(this::onClick);
         register.setOnClickListener(this::onClick);
+        cargarPreferencias();
         return v;
     }
 
@@ -92,20 +93,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     }
     private void cargarPreferencias(){
         SharedPreferences preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        String usuario = preferencias.getString("user", "No existe la info.");
-        String password = preferencias.getString("password", "No existe la info.");
+        String usuario = preferencias.getString("user", "");
+        String pass = preferencias.getString("password", "");
 
-        //textView.setText(usuario)
-        //textView.setText(password)
+        username.setText(usuario);
+        password.setText(pass);
     }
 
     private void guardarPreferencias(String user, String pass){
         SharedPreferences preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        String usuario = "" ; //TextView.getText().toString();
-        String password = ""; //TextView.getText().toString();
         SharedPreferences.Editor editor = preferencias.edit();
-        editor.putString("user", usuario);
-        editor.putString("password", password);
+        editor.putString("user", user);
+        editor.putString("password", pass);
         editor.commit();
     }
 

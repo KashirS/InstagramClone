@@ -52,7 +52,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
 
         public void bindData(Publication p){
             nombre_usuario.setText(p.getUser_propietario().getNombre_usuario());
-            imagen_publicacion.setImageResource(imagen_publicacion.getImageAlpha());
+            //imagen_publicacion.setImageResource(p.getImagen_publicacion());
             num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().size() + " usuarios");
         }
     }

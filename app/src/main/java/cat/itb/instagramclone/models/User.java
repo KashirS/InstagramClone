@@ -5,7 +5,17 @@ import android.widget.ImageView;
 public class User {
     int id_usuario;
     String nombre_usuario;
-    ImageView imagen_usuario;
+    int imagen_usuario;
+
+    public User(int id_usuario, String nombre_usuario, int imagen_usuario) {
+        this.id_usuario = id_usuario;
+        this.nombre_usuario = nombre_usuario;
+        this.imagen_usuario = imagen_usuario;
+    }
+
+    public User() {
+
+    }
 
     public int getId_usuario() {
         return id_usuario;
@@ -23,11 +33,11 @@ public class User {
         this.nombre_usuario = nombre_usuario;
     }
 
-    public ImageView getImagen_usuario() {
+    public int getImagen_usuario() {
         return imagen_usuario;
     }
 
-    public void setImagen_usuario(ImageView imagen_usuario) {
+    public void setImagen_usuario(int imagen_usuario) {
         this.imagen_usuario = imagen_usuario;
     }
 }
