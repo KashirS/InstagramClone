@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 
@@ -43,17 +45,22 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         MaterialButton nombre_usuario;
         ImageView imagen_publicacion;
         MaterialButton num_likes_publicacion;
+        MaterialButton nombre_usuario_2;
+        MaterialTextView texto_usuario;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.nombre_usuario = itemView.findViewById(R.id.nombre_usuario_button);
             imagen_publicacion = itemView.findViewById(R.id.imagen_publicacion);
             num_likes_publicacion = itemView.findViewById(R.id.num_likes_button);
+            nombre_usuario_2 = itemView.findViewById(R.id.nombre_usuario_button_2);
+            texto_usuario = itemView.findViewById(R.id.texto_usuario_textView);
         }
 
         public void bindData(Publication p){
             nombre_usuario.setText(p.getUser_propietario().getNombre_usuario());
             //imagen_publicacion.setImageResource(p.getImagen_publicacion());
             num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().size() + " usuarios");
+
         }
     }
 }
