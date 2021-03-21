@@ -16,6 +16,11 @@ import cat.itb.instagramclone.models.Chat;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     List<Chat> chatList;
+
+    public ChatAdapter(List<Chat> chatList) {
+        this.chatList = chatList;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

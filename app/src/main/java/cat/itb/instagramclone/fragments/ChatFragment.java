@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -37,7 +38,7 @@ public class ChatFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.chat_fragment, container, false);
         chat_recyclerView = v.findViewById(R.id.chat_recyclerView);
-        chat_recyclerView.setLayoutManager(getContext());
+        chat_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         chat_recyclerView.setAdapter(new ChatAdapter(mViewModel.chatsList));
         return v;
     }

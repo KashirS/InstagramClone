@@ -5,7 +5,7 @@ import java.util.List;
 public class Chat {
     int chat_id;
     User user_chat;
-    List<String> chat
+    List<String> chat;
 
     public Chat() {
 
