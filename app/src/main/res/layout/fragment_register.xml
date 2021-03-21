@@ -28,6 +28,7 @@
                 android:textColor="@color/black"
                 android:layout_gravity="center"
                 android:layout_margin="30dp"
+                android:fontFamily="@font/latomedium"
                 />
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/outlined_username"
@@ -45,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textColor="@color/black"
+                    android:fontFamily="@font/latomedium"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,6 +109,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textColor="@color/black"
+                    android:fontFamily="@font/latomedium"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,6 +127,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textColor="@color/black"
+                    android:fontFamily="@font/latomedium"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,6 +146,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textColor="@color/black"
+                    android:fontFamily="@font/latomedium"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -154,6 +159,7 @@
                 android:gravity="left"
                 android:textColor="@color/black"
                 style="?attr/materialButtonOutlinedStyle"
+                android:fontFamily="@font/latomedium"
                 >
             </com.google.android.material.button.MaterialButton>
 
@@ -164,6 +170,7 @@
                 android:textSize="10dp"
                 android:text="accept terms and conditions"
                 android:textColor="@color/black"
+                android:fontFamily="@font/latomedium"
                 />
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/register_register"
@@ -174,7 +181,9 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/blue"
                 android:text="REGISTER"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:fontFamily="@font/latomedium"
+                />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_button_register"
@@ -188,6 +197,7 @@
                 android:text="LOGIN"
                 android:textColor="@color/black"
                 style="?attr/materialButtonOutlinedStyle"
+                android:fontFamily="@font/latomedium"
                 />
         </LinearLayout>
     </ScrollView>
