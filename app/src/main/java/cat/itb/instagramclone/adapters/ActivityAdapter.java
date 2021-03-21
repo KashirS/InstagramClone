@@ -50,7 +50,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         }
 
         public void bindData(Notification not){
-            imagen_user_notification.setImageResource(not.getUser_notification().getImagen_usuario());
+            //imagen_user_notification.setImageResource(not.getUser_notification().getImagen_usuario());
             texto_notificacion.setText(not.getNotification());
         }
     }
