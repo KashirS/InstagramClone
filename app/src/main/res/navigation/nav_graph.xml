@@ -34,5 +34,19 @@
         android:id="@+id/homeFragment"
         android:name="cat.itb.instagramclone.fragments.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="cat.itb.instagramclone.fragments.ChatFragment"
+        android:label="chat_fragment"
+        tools:layout="@layout/chat_fragment">
+        <action
+            android:id="@+id/action_chatFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
 </navigation>
