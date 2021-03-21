@@ -1,11 +1,14 @@
 package cat.itb.instagramclone.adapters;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -58,7 +61,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
 
         public void bindData(Publication p){
             nombre_usuario.setText(p.getUser_propietario().getNombre_usuario());
-            //imagen_publicacion.setImageResource(p.getImagen_publicacion());
+            //imagen_publicacion.setImageDrawable();
             num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().size() + " usuarios");
             nombre_usuario_2.setText(p.getUser_propietario().getNombre_usuario());
             texto_usuario.setText(p.getTexto_publicacion());
