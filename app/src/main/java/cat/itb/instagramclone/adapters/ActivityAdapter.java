@@ -18,6 +18,10 @@ import cat.itb.instagramclone.models.Notification;
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder> {
     List<Notification> notificationList;
 
+    public ActivityAdapter(List<Notification> notificationList) {
+        this.notificationList = notificationList;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
