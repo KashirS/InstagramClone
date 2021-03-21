@@ -3,6 +3,7 @@ package cat.itb.instagramclone.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -41,7 +42,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView imagen_usuario;
+        ImageButton imagen_usuario;
         MaterialTextView nombre_usuario;
 
         public ViewHolder(@NonNull View itemView) {

@@ -36,10 +36,12 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         View v = inflater.inflate(R.layout.search_fragment, container, false);
         search_recyclerView = v.findViewById(R.id.search_recyclerView);
         search_recyclerView.setLayoutManager(new GridLayoutManager(getContext(),4));
-        search_recyclerView.setAdapter(new SearchAdapter());
+        search_recyclerView.setAdapter(new SearchAdapter(SearchViewModel.searchesList));
+
         return v;
     }
 

@@ -16,6 +16,10 @@ import cat.itb.instagramclone.models.Publication;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
     List<Publication> publicationList;
 
+    public SearchAdapter(List<Publication> publicationList) {
+        this.publicationList = publicationList;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
