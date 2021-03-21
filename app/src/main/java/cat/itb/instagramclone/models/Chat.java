@@ -1,8 +1,21 @@
 package cat.itb.instagramclone.models;
 
+import java.util.List;
+
 public class Chat {
     int chat_id;
     User user_chat;
+    List<String> chat
+
+    public Chat() {
+
+    }
+
+    public Chat(int chat_id, User user_chat, List<String> chat) {
+        this.chat_id = chat_id;
+        this.user_chat = user_chat;
+        this.chat = chat;
+    }
 
     public int getChat_id() {
         return chat_id;

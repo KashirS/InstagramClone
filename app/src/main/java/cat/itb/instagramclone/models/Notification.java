@@ -5,6 +5,15 @@ public class Notification {
     User user_notification;
     String notification;
 
+    public Notification() {
+
+    }
+    public Notification(int id_notification, User user_notification, String notification) {
+        this.id_notification = id_notification;
+        this.user_notification = user_notification;
+        this.notification = notification;
+    }
+
     public int getId_notification() {
         return id_notification;
     }
