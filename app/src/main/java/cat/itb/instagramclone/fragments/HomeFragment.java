@@ -53,8 +53,8 @@ public class HomeFragment extends Fragment {
         publicaciones_recyclerView.setAdapter(new PublicationAdapter(mViewModel.publicacionesList));
 
         story = v.findViewById(R.id.story_recy);
-        story.setLayoutManager(new GridLayoutManager(getContext(),1));
-        story.setAdapter(new StoryAdapter());
+        story.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        story.setAdapter(new StoryAdapter(mViewModel.storyList));
 
         return v;
     }

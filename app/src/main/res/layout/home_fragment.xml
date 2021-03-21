@@ -29,13 +29,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/story_recy"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:scrollbars="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        android:orientation="horizontal"
-        tools:listitem="@layout/story_home_item"
-        />
+        tools:listitem="@layout/story_home_item" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_publication_recyclerView"
@@ -43,7 +44,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/story_recy"
         tools:listitem="@layout/publicacion_home_item" />
 
 

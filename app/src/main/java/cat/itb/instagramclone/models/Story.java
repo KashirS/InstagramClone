@@ -7,7 +7,14 @@ import java.util.List;
 public class Story {
     int id_story;
     User user_story;
-    List<ImageView> imagenes_storys;
+    List<Integer> imagenes_storys;
+
+    public Story(int id_story, User user_story, List<Integer> imagenes_storys) {
+        this.id_story = id_story;
+        this.user_story = user_story;
+        this.imagenes_storys = imagenes_storys;
+    }
+
 
     public int getId_story() {
         return id_story;
@@ -25,11 +32,11 @@ public class Story {
         this.user_story = user_story;
     }
 
-    public List<ImageView> getImagenes_storys() {
+    public List<Integer> getImagenes_storys() {
         return imagenes_storys;
     }
 
-    public void setImagenes_storys(List<ImageView> imagenes_storys) {
+    public void setImagenes_storys(List<Integer> imagenes_storys) {
         this.imagenes_storys = imagenes_storys;
     }
 }

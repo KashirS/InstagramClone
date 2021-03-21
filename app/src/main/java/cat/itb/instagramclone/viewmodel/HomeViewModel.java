@@ -8,11 +8,13 @@ import java.util.Collections;
 import java.util.List;
 
 import cat.itb.instagramclone.models.Publication;
+import cat.itb.instagramclone.models.Story;
 import cat.itb.instagramclone.models.User;
 
 public class HomeViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     public static List<Publication> publicacionesList = new ArrayList<Publication>();
+    public static List<Story> storyList = new ArrayList<Story>();
 
     String[] comentarios = {
             "Gran foto",
@@ -37,7 +39,24 @@ public class HomeViewModel extends ViewModel {
             new Publication(7, new User(7, "@pepe", 7), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
     };
 
+    Integer [] histori= {
+            1,
+        2,
+        3
+    };
+
+    Story[] historis = {
+            new Story(1, new User(1, "@jorge22", 1), Arrays.asList(histori)),
+            new Story(2, new User(2, "@kashir33", 2), Arrays.asList(histori)),
+            new Story(3, new User(3, "@jorge1", 3), Arrays.asList(histori)),
+            new Story(4, new User(4, "@kashi2r", 4), Arrays.asList(histori)),
+            new Story(5, new User(5, "@jorge", 5), Arrays.asList(histori)),
+            new Story(6, new User(6, "@kashir", 6), Arrays.asList(histori)),
+            new Story(7, new User(7, "@manolooo22", 7), Arrays.asList(histori))
+    };
+
     public HomeViewModel() {
         Collections.addAll(publicacionesList, publicaciones);
+        Collections.addAll(storyList, historis);
     }
 }

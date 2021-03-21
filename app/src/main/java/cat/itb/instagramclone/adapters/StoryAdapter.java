@@ -19,6 +19,10 @@ import cat.itb.instagramclone.models.Story;
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
     List<Story> storyList;
 
+    public StoryAdapter(List<Story> storyList) {
+        this.storyList = storyList;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,7 +51,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         }
 
         public void bindData(Story s){
-            imagen_usuario.setImageResource(s.getUser_story().getImagen_usuario());
+            //imagen_usuario.setImageResource(s.getUser_story().getImagen_usuario());
             nombre_usuario.setText(s.getUser_story().getNombre_usuario());
         }
     }
