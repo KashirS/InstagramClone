@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -36,7 +37,10 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bindData(this.publicationList.get(position));
+        Publication p = this.publicationList.get(position);
+        Drawable d = holder.itemView.getContext().getResources().getDrawable(p.getImagen_publicacion());
+        Drawable imageUser = holder.itemView.getContext().getResources().getDrawable(p.getUser_propietario().getImagen_usuario());
+        holder.bindData(p, d, imageUser);
     }
 
     @Override
@@ -46,6 +50,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         MaterialButton nombre_usuario;
+        ImageButton image_usuario_button;
         ImageView imagen_publicacion;
         MaterialButton num_likes_publicacion;
         MaterialButton nombre_usuario_2;
@@ -53,15 +58,17 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.nombre_usuario = itemView.findViewById(R.id.nombre_usuario_button);
-            imagen_publicacion = itemView.findViewById(R.id.imagen_publicacion);
-            num_likes_publicacion = itemView.findViewById(R.id.num_likes_button);
-            nombre_usuario_2 = itemView.findViewById(R.id.nombre_usuario_button_2);
-            texto_usuario = itemView.findViewById(R.id.texto_usuario_textView);
+            this.imagen_publicacion = itemView.findViewById(R.id.imagen_publicacion);
+            this.num_likes_publicacion = itemView.findViewById(R.id.num_likes_button);
+            this.nombre_usuario_2 = itemView.findViewById(R.id.nombre_usuario_button_2);
+            this.texto_usuario = itemView.findViewById(R.id.texto_usuario_textView);
+            this.image_usuario_button = itemView.findViewById(R.id.imagen_usuario_button);
         }
 
-        public void bindData(Publication p){
+        public void bindData(Publication p, Drawable imagePublicacion, Drawable imageUser){
+            image_usuario_button.setImageDrawable(imageUser);
             nombre_usuario.setText(p.getUser_propietario().getNombre_usuario());
-            //imagen_publicacion.setImageDrawable();
+            imagen_publicacion.setImageDrawable(imagePublicacion);
             num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().size() + " usuarios");
             nombre_usuario_2.setText(p.getUser_propietario().getNombre_usuario());
             texto_usuario.setText(p.getTexto_publicacion());

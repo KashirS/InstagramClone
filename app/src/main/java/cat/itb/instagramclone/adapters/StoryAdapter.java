@@ -1,5 +1,7 @@
 package cat.itb.instagramclone.adapters;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +35,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bindData(this.storyList.get(position));
+        Story s = this.storyList.get(position);
+        Drawable d = holder.itemView.getContext().getResources().getDrawable(s.getUser_story().getImagen_usuario());
+
+        holder.bindData(s, d);
     }
 
     @Override
@@ -51,8 +56,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
             nombre_usuario = itemView.findViewById(R.id.nombre_user_story_item);
         }
 
-        public void bindData(Story s){
-            imagen_usuario.setImageDrawable(s.getUser_story().getImagen_usuario());
+        public void bindData(Story s, Drawable drawable){
+            imagen_usuario.setImageDrawable(drawable);
             nombre_usuario.setText(s.getUser_story().getNombre_usuario());
         }
     }

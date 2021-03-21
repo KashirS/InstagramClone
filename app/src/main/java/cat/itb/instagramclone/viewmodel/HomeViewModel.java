@@ -34,29 +34,29 @@ public class HomeViewModel extends ViewModel {
     };
 
     Publication[] publicaciones = {
-            new Publication(1, new User(1, "@jorge", new Drawable()), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(2, new User(2, "@kashir", R.drawable.lambo), "El crack", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(3, new User(3, "@jorge2", R.drawable.lambo), "Postureo", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(4, new User(4, "@kashir2" , R.drawable.lambo), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(5, new User(5, "@jorge3", R.drawable.lambo), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "@kashir3", R.drawable.lambo), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
-            new Publication(7, new User(7, "@pepe", R.drawable.lambo), "Gran dia", Arrays.asList(users), 10, Arrays.asList(comentarios)),
+            new Publication(1, new User(1, "@jorge", R.drawable.lambo), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
+            new Publication(2, new User(2, "@kashir", R.drawable.lambo), "El crack", Arrays.asList(users), R.drawable.instagram_logo, Arrays.asList(comentarios)),
+            new Publication(3, new User(3, "@jorge2", R.drawable.lambo), "Postureo", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
+            new Publication(4, new User(4, "@kashir2" , R.drawable.lambo), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
+            new Publication(5, new User(5, "@jorge3", R.drawable.lambo), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
+            new Publication(6, new User(6, "@kashir3", R.drawable.lambo), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
+            new Publication(7, new User(7, "@pepe", R.drawable.lambo), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
     };
 
     Integer [] histori= {
-            1,
-        2,
-        3
+            R.drawable.gogeta,
+            R.drawable.gogeta,
+            R.drawable.gogeta
     };
 
     Story[] historis = {
-            new Story(1, new User(R.drawable.gogeta, "@jorge22", 1), Arrays.asList(histori)),
-            new Story(2, new User(R.drawable.gogeta, "@kashir33", 2), Arrays.asList(histori)),
-            new Story(3, new User(R.drawable.gogeta, "@jorge1", 3), Arrays.asList(histori)),
-            new Story(4, new User(R.drawable.gogeta, "@kashi2r", 4), Arrays.asList(histori)),
-            new Story(5, new User(R.drawable.gogeta, "@jorge", 5), Arrays.asList(histori)),
-            new Story(6, new User(R.drawable.gogeta, "@kashir", 6), Arrays.asList(histori)),
-            new Story(7, new User(R.drawable.gogeta, "@manolooo22", 7), Arrays.asList(histori))
+            new Story(1, new User(R.drawable.gogeta, "@jorge22", R.drawable.lambo), Arrays.asList(histori)),
+            new Story(2, new User(R.drawable.gogeta, "@kashir33", R.drawable.lambo), Arrays.asList(histori)),
+            new Story(3, new User(R.drawable.gogeta, "@jorge1", R.drawable.lambo), Arrays.asList(histori)),
+            new Story(4, new User(R.drawable.gogeta, "@kashi2r", R.drawable.lambo), Arrays.asList(histori)),
+            new Story(5, new User(R.drawable.gogeta, "@jorge", R.drawable.lambo), Arrays.asList(histori)),
+            new Story(6, new User(R.drawable.gogeta, "@kashir", R.drawable.lambo), Arrays.asList(histori)),
+            new Story(7, new User(R.drawable.gogeta, "@manolooo22", R.drawable.lambo), Arrays.asList(histori))
     };
 
     public HomeViewModel() {

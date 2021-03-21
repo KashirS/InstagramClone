@@ -10,13 +10,13 @@ public class Publication {
     User user_propietario;
     String texto_publicacion;
     List<User> likes_publicacion;
-    Drawable imagen_publicacion;
+    int imagen_publicacion;
     List<String> comentarios;
 
     public Publication() {
     }
 
-    public Publication(int id_publicacion, User user_propietario, String texto_publicacion, List<User> likes_publicacion, Drawable imagen_publicacion_id, List<String> comentarios) {
+    public Publication(int id_publicacion, User user_propietario, String texto_publicacion, List<User> likes_publicacion, int imagen_publicacion_id, List<String> comentarios) {
         this.id_publicacion = id_publicacion;
         this.user_propietario = user_propietario;
         this.texto_publicacion = texto_publicacion;
@@ -57,11 +57,11 @@ public class Publication {
         this.texto_publicacion = texto_publicacion;
     }
 
-    public Drawable getImagen_publicacion() {
+    public int getImagen_publicacion() {
         return imagen_publicacion;
     }
 
-    public void setImagen_publicacion(Drawable imagen_publicacion) {
+    public void setImagen_publicacion(int imagen_publicacion) {
         this.imagen_publicacion = imagen_publicacion;
     }
 
