@@ -3,6 +3,7 @@ package cat.itb.instagramclone.fragments;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cat.itb.instagramclone.R;
+import cat.itb.instagramclone.activities.MainActivity;
 import cat.itb.instagramclone.adapters.PublicationAdapter;
 import cat.itb.instagramclone.viewmodel.HomeViewModel;
 
@@ -34,6 +37,8 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        MainActivity.mostrarNavDrawer();
+
     }
 
     @Override
@@ -45,5 +50,7 @@ public class HomeFragment extends Fragment {
         publicaciones_recyclerView.setAdapter(new PublicationAdapter(mViewModel.publicacionesList));
         return v;
     }
+
+
 
 }

@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import cat.itb.instagramclone.R;
+import cat.itb.instagramclone.activities.MainActivity;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener{
@@ -53,6 +54,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         login.setOnClickListener(this::onClick);
         register.setOnClickListener(this::onClick);
         cargarPreferencias();
+        MainActivity.quitarNavDrawer();
         return v;
     }
 
