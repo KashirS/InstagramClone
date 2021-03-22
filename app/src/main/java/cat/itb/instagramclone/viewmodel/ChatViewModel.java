@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.models.Chat;
 import cat.itb.instagramclone.models.Publication;
 import cat.itb.instagramclone.models.User;
@@ -24,9 +25,9 @@ public class ChatViewModel extends ViewModel {
 
 
     Chat[] chats = {
-            new Chat(1, new User(1, "@kachir1", 1), Arrays.asList(chat)),
-            new Chat(1, new User(1, "@manolo22", 1), Arrays.asList(chat)),
-            new Chat(1, new User(1, "@pepe33", 1), Arrays.asList(chat))
+            new Chat(1, new User(1, "@kachir1", R.drawable.gogeta, null, ""), Arrays.asList(chat)),
+            new Chat(1, new User(1, "@manolo22", R.drawable.gogeta, null, ""), Arrays.asList(chat)),
+            new Chat(1, new User(1, "@pepe33", R.drawable.gogeta, null, ""), Arrays.asList(chat))
     };
 
     public ChatViewModel() {

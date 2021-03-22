@@ -23,6 +23,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.activities.MainActivity;
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel mViewModel;
     RecyclerView publicaciones_recyclerView;
     RecyclerView story;
+    MenuItem chat_item;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -63,6 +65,7 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.home_top_appbar,menu);
@@ -74,8 +77,11 @@ public class HomeFragment extends Fragment {
         switch (item.getItemId()){
             case R.id.home_to_chat:
                 Navigation.findNavController(getView()).navigate(R.id.action_homeFragment_to_chatFragment);
-            break;
+                return true;
+
+            default: return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+
     }
+
 }
