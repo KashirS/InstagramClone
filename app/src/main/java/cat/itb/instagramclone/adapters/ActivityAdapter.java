@@ -54,7 +54,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
         public void bindData(Notification not, Drawable image){
             imagen_user_notification.setImageDrawable(image);
-            texto_notificacion.setText(not.getNotification());
+            texto_notificacion.setText(not.getUser_notification().getNombre_usuario()+" "+not.getNotification());
         }
     }
 }

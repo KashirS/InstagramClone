@@ -40,7 +40,10 @@ public class ProfileViewModel extends ViewModel {
             new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.broly, Arrays.asList(comentarios)),
             new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
             new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.instagram_logo, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios))
+            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
+            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.gohan, Arrays.asList(comentarios)),
+            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.lambo, Arrays.asList(comentarios)),
+            new Publication(7, new User(7, "@pepe", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios))
     };
 
 
