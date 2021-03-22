@@ -8,8 +8,11 @@
     >
     <ImageView
         android:id="@+id/user_image_notification"
-        android:layout_width="75dp"
-        android:layout_height="75dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="75dp"
+        android:maxHeight="75dp"
+        android:adjustViewBounds="true"/>
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_notification"
         android:layout_width="match_parent"
