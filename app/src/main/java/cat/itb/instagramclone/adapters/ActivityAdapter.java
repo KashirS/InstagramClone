@@ -1,5 +1,6 @@
 package cat.itb.instagramclone.adapters;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bindData(this.notificationList.get(position));
+        Notification n = this.notificationList.get(position);
+        Drawable image = holder.itemView.getContext().getResources().getDrawable(n.getUser_notification().getImagen_usuario());
+        holder.bindData(n, image);
     }
 
     @Override
@@ -49,8 +52,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
             texto_notificacion = itemView.findViewById(R.id.text_notification);
         }
 
-        public void bindData(Notification not){
-            //imagen_user_notification.setImageResource(not.getUser_notification().getImagen_usuario());
+        public void bindData(Notification not, Drawable image){
+            imagen_user_notification.setImageDrawable(image);
             texto_notificacion.setText(not.getNotification());
         }
     }

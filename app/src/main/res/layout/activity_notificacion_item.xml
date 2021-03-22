@@ -15,5 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="Notification text"
+        android:fontFamily="@font/latomedium"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20dp"
         />
 </LinearLayout>
