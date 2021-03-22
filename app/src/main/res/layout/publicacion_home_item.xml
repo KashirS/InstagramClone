@@ -36,14 +36,11 @@
             android:text="user_name"
             android:textColor="@color/black"
             />
-
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/opciones_publicacion"
-            android:layout_width="0dp"
+            android:layout_width="40sp"
             android:layout_height="match_parent"
-            android:layout_weight="0.1"
-            android:backgroundTint="@color/white"
-            android:background="@drawable/publicacion_menu"
+            app:icon="@drawable/publicacion_menu"
             />
     </LinearLayout>
     <RelativeLayout
