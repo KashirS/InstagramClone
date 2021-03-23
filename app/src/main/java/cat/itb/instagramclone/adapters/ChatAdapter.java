@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 
@@ -43,18 +44,21 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        MaterialButton user_chat_button;
+        MaterialTextView user_chat_button;
+        MaterialTextView chat_user;
         ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             user_chat_button = itemView.findViewById(R.id.user_chat_button);
             imageView = itemView.findViewById(R.id.chat_user_image);
+            chat_user = itemView.findViewById(R.id.chat_chat);
         }
 
         public void bindData(Chat chat,  Drawable drawable){
             user_chat_button.setText(chat.getUser_chat().getNombre_usuario());
             imageView.setImageDrawable(drawable);
+            chat_user.setText(chat.getChat().get(0));
         }
     }
 }
