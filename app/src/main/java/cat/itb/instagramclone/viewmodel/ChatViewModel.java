@@ -26,8 +26,13 @@ public class ChatViewModel extends ViewModel {
 
     Chat[] chats = {
             new Chat(1, new User(1, "@kachir1", R.drawable.gogeta, null, ""), Arrays.asList(chat)),
-            new Chat(1, new User(1, "@manolo22", R.drawable.gogeta, null, ""), Arrays.asList(chat)),
-            new Chat(1, new User(1, "@pepe33", R.drawable.gogeta, null, ""), Arrays.asList(chat))
+            new Chat(1, new User(1, "@manolo22", R.drawable.broly, null, ""), Arrays.asList(chat)),
+            new Chat(1, new User(1, "@pepe33", R.drawable.instagram_logo, null, ""), Arrays.asList(chat)),
+            new Chat(1, new User(1, "@manolo22", R.drawable.vegeta, null, ""), Arrays.asList(chat)),
+            new Chat(1, new User(1, "@manolo22", R.drawable.gohan, null, ""), Arrays.asList(chat)),
+            new Chat(1, new User(1, "@pepe56", R.drawable.lambo, null, ""), Arrays.asList(chat)),
+            new Chat(1, new User(1, "@manolo22", R.drawable.gohan, null, ""), Arrays.asList(chat)),
+            new Chat(1, new User(1, "@juan2", R.drawable.instagram_logo, null, ""), Arrays.asList(chat))
     };
 
     public ChatViewModel() {
