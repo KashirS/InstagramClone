@@ -181,7 +181,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/blue"
                 android:text="REGISTER"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:fontFamily="@font/latomedium"
                 />
 
