@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.activities.MainActivity;
@@ -30,11 +34,13 @@ import cat.itb.instagramclone.adapters.PublicationAdapter;
 import cat.itb.instagramclone.adapters.StoryAdapter;
 import cat.itb.instagramclone.viewmodel.HomeViewModel;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
     private HomeViewModel mViewModel;
     RecyclerView publicaciones_recyclerView;
     RecyclerView story;
+    MenuItem chat_item;
+    MaterialToolbar materialToolbar;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -45,7 +51,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         MainActivity.mostrarNavDrawer();
-
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -55,13 +61,15 @@ public class HomeFragment extends Fragment {
         publicaciones_recyclerView = v.findViewById(R.id.home_publication_recyclerView);
         publicaciones_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         publicaciones_recyclerView.setAdapter(new PublicationAdapter(mViewModel.publicacionesList));
-
+        materialToolbar = v.findViewById(R.id.top_app_bar);
+        materialToolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
         story = v.findViewById(R.id.story_recy);
         story.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         story.setAdapter(new StoryAdapter(mViewModel.storyList));
 
         return v;
     }
+
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -74,8 +82,11 @@ public class HomeFragment extends Fragment {
         switch (item.getItemId()){
             case R.id.home_to_chat:
                 Navigation.findNavController(getView()).navigate(R.id.action_homeFragment_to_chatFragment);
-            break;
+                return true;
+
+            default: return false;
         }
-        return super.onOptionsItemSelected(item);
+
     }
+
 }

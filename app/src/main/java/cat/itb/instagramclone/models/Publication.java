@@ -1,5 +1,6 @@
 package cat.itb.instagramclone.models;
 
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import java.util.List;

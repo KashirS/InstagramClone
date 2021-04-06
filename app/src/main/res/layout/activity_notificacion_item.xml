@@ -2,18 +2,25 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     android:orientation="horizontal"
     android:layout_margin="1dp"
     >
     <ImageView
         android:id="@+id/user_image_notification"
-        android:layout_width="75dp"
-        android:layout_height="75dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="75dp"
+        android:maxHeight="75dp"
+        android:adjustViewBounds="true"/>
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_notification"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:hint="Notification text"
+        android:fontFamily="@font/latomedium"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20dp"
+        android:layout_marginLeft="1dp"
         />
 </LinearLayout>

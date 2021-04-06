@@ -1,5 +1,6 @@
 package cat.itb.instagramclone.adapters;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bindData(this.publicationList.get(position));
+        Publication p = this.publicationList.get(position);
+        Drawable image = holder.itemView.getContext().getResources().getDrawable(p.getUser_propietario().getImagen_usuario());
+        holder.bindData(p, image);
     }
 
     @Override
@@ -44,9 +47,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             imagen_publicacion = itemView.findViewById(R.id.imagen_publicacion_search);
         }
 
-        public void bindData(Publication p){
+        public void bindData(Publication p, Drawable image){
             //TODO: Poner imagenes
-            //imagen_publicacion.setImageResource(p.getImagen_publicacion());
+            imagen_publicacion.setImageResource(p.getImagen_publicacion());
         }
     }
 }

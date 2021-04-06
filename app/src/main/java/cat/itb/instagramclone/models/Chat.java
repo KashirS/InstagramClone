@@ -5,6 +5,15 @@ import java.util.List;
 public class Chat {
     int chat_id;
     User user_chat;
+
+    public List<String> getChat() {
+        return chat;
+    }
+
+    public void setChat(List<String> chat) {
+        this.chat = chat;
+    }
+
     List<String> chat;
 
     public Chat() {

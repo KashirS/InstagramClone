@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <com.google.android.material.button.MaterialButton
+
+    <ImageView
+        android:id="@+id/chat_user_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:srcCompat="@drawable/fb" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/user_chat_button"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:hint="Nombre Usuario Chat"/>
+        android:layout_height="60dp"
+        android:textAlignment="textStart"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_toRightOf="@id/chat_user_image"
+        android:hint="Nombre Usuario Chat"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:gravity="start" />
 
-</LinearLayout>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/chat_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:textAlignment="textStart"
+        android:layout_toRightOf="@id/chat_user_image"
+        android:layout_below="@id/user_chat_button"
+        android:gravity="start" />
+
+</RelativeLayout>
