@@ -5,14 +5,14 @@ import android.widget.ImageView;
 import java.util.List;
 
 public class User {
-    int id_usuario;
+    String id_usuario;
     String nombre_usuario;
     int imagen_usuario;
 
     List<Publication> publications_user;
     String descripcion_user;
 
-    public User(int id_usuario, String nombre_usuario, int imagen_usuario, List<Publication> publications_user, String descripcion_user) {
+    public User(String id_usuario, String nombre_usuario, int imagen_usuario, List<Publication> publications_user, String descripcion_user) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
         this.imagen_usuario = imagen_usuario;
@@ -36,11 +36,11 @@ public class User {
         this.publications_user = publications_user;
     }
 
-    public int getId_usuario() {
+    public String getId_usuario() {
         return id_usuario;
     }
 
-    public void setId_usuario(int id_usuario) {
+    public void setId_usuario(String id_usuario) {
         this.id_usuario = id_usuario;
     }
 

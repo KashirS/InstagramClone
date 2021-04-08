@@ -24,31 +24,31 @@ public class ProfileViewModel extends ViewModel {
     };
 
     User[] users = {
-            new User(1, "@jorge", R.drawable.gogeta, null, ""),
-            new User(2, "@kashir", R.drawable.gogeta, null, ""),
-            new User(3, "@manolo_33", R.drawable.gogeta, null, "")
+            new User("", "@jorge", R.drawable.gogeta, null, ""),
+            new User("", "@kashir", R.drawable.gogeta, null, ""),
+            new User("", "@manolo_33", R.drawable.gogeta, null, "")
     };
 
     Publication[] publicaciones = {
-            new Publication(1, new User(1, "@jorge", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
-            new Publication(2, new User(2, "@kashir", R.drawable.lambo, null, ""), "El crack", Arrays.asList(users), R.drawable.instagram_logo, Arrays.asList(comentarios)),
-            new Publication(3, new User(3, "@jorge2", R.drawable.lambo, null,""), "Postureo", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
-            new Publication(4, new User(4, "@kashir2" , R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.lambo, Arrays.asList(comentarios)),
-            new Publication(5, new User(5, "@jorge3", R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.broly, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.gohan, Arrays.asList(comentarios)),
-            new Publication(7, new User(7, "@pepe", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.broly, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.instagram_logo, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.gohan, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.lambo, Arrays.asList(comentarios)),
-            new Publication(7, new User(7, "@pepe", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios))
+            new Publication(1, new User("", "@jorge", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
+            new Publication(2, new User("", "@kashir", R.drawable.lambo, null, ""), "El crack", Arrays.asList(users), R.drawable.instagram_logo, Arrays.asList(comentarios)),
+            new Publication(3, new User("", "@jorge2", R.drawable.lambo, null,""), "Postureo", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
+            new Publication(4, new User("", "@kashir2" , R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.lambo, Arrays.asList(comentarios)),
+            new Publication(5, new User("", "@jorge3", R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.broly, Arrays.asList(comentarios)),
+            new Publication(6, new User("", "@kashir3", R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.gohan, Arrays.asList(comentarios)),
+            new Publication(7, new User("", "@pepe", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
+            new Publication(6, new User("", "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.broly, Arrays.asList(comentarios)),
+            new Publication(6, new User("", "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
+            new Publication(6, new User("", "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.instagram_logo, Arrays.asList(comentarios)),
+            new Publication(6, new User("", "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
+            new Publication(6, new User("", "@kashir3", R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.gohan, Arrays.asList(comentarios)),
+            new Publication(6, new User("", "@kashir3", R.drawable.lambo, null,""), "Gran dia", Arrays.asList(users), R.drawable.lambo, Arrays.asList(comentarios)),
+            new Publication(7, new User("", "@pepe", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios))
     };
 
 
     public ProfileViewModel() {
         //Collections.addAll(publicacionesList, publicaciones);
-        user = new User(1, "@gogeta55", R.drawable.gogeta, Arrays.asList(publicaciones), "Super Sayan Dios XD");
+        user = new User("", "@gogeta55", R.drawable.gogeta, Arrays.asList(publicaciones), "Super Sayan Dios XD");
     }
 }
