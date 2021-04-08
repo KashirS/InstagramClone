@@ -8,6 +8,7 @@ public class User {
     int id_usuario;
     String nombre_usuario;
     int imagen_usuario;
+
     List<Publication> publications_user;
     String descripcion_user;
 
