@@ -22,7 +22,7 @@
             android:layout_weight="0.15"
             android:background="@drawable/image_roundcorner"
             android:src="@drawable/fb"
-            android:scaleType="center"
+            android:layout_gravity="center"
             />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nombre_usuario_button"
