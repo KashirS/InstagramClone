@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         setContentView(R.layout.activity_main);
 
         database = FirebaseDatabase.getInstance();
+
         databaseReference = database.getReference("User");
 
        User user = new User( "","@jorge", R.drawable.gogeta, null, "");
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
         view = findViewById(R.id.bottom_navigation);
         view.setOnNavigationItemSelectedListener(this);
+
+        //TODO: https://es.stackoverflow.com/questions/254882/android-c%C3%B3mo-reducir-tama%C3%B1o-de-un-bitmap Usos bitmap sino URL
 
     }
 
