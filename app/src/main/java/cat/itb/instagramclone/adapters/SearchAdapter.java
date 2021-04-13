@@ -13,6 +13,7 @@ import java.util.List;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.models.Publication;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
     List<Publication> publicationList;
@@ -44,7 +45,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         ImageView imagen_publicacion;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imagen_publicacion = itemView.findViewById(R.id.imagen_publicacion_search);
+            imagen_publicacion = itemView.findViewById(R.id.image_pub);
         }
 
         public void bindData(Publication p, Drawable image){

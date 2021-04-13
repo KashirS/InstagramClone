@@ -18,8 +18,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavig
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.List;
-
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.fragments.ActivityFragment;
 import cat.itb.instagramclone.fragments.HomeFragment;

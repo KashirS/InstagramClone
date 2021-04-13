@@ -19,10 +19,11 @@
             android:id="@+id/imagen_usuario_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:background="@drawable/image_roundcorner"
+            android:layout_weight="0.12"
+            android:background="@drawable/round_shape"
             android:src="@drawable/fb"
             android:layout_gravity="center"
+
             />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nombre_usuario_button"
@@ -57,7 +58,7 @@
             android:layout_height="match_parent"
             android:maxHeight="300dp"/>
     </RelativeLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
@@ -67,20 +68,30 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:src="@drawable/heart_like_image"
+            android:visibility="invisible"
+            />
+        <ImageButton
+            android:id="@+id/dislike_publicacion_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/heart_dislike"
             />
         <ImageButton
             android:id="@+id/comentarios_publicacion_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
+            android:layout_toRightOf="@id/like_publicacion_button"
             app:srcCompat="@android:drawable/sym_action_chat" />
         <ImageButton
             android:id="@+id/compartir_publicacion_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
+            android:layout_toRightOf="@id/comentarios_publicacion_button"
             app:srcCompat="@android:drawable/ic_menu_send" />
-    </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
