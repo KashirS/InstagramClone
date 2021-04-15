@@ -47,6 +47,9 @@ dependencies {
     implementation "de.hdodenhof:circleimageview:3.1.0"
     implementation 'id.zelory:compressor:2.1.0'
 
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
 
     // implementation that's we need for proyect.
 

@@ -7,12 +7,12 @@ import java.util.List;
 public class User {
     String id_usuario;
     String nombre_usuario;
-    int imagen_usuario;
+    String imagen_usuario;
 
     List<Publication> publications_user;
     String descripcion_user;
 
-    public User(String id_usuario, String nombre_usuario, int imagen_usuario, List<Publication> publications_user, String descripcion_user) {
+    public User(String id_usuario, String nombre_usuario, String imagen_usuario, List<Publication> publications_user, String descripcion_user) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
         this.imagen_usuario = imagen_usuario;
@@ -52,11 +52,11 @@ public class User {
         this.nombre_usuario = nombre_usuario;
     }
 
-    public int getImagen_usuario() {
+    public String getImagen_usuario() {
         return imagen_usuario;
     }
 
-    public void setImagen_usuario(int imagen_usuario) {
+    public void setImagen_usuario(String imagen_usuario) {
         this.imagen_usuario = imagen_usuario;
     }
 }

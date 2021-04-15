@@ -41,24 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         setContentView(R.layout.activity_main);
 
         database = FirebaseDatabase.getInstance();
-
         databaseReference = database.getReference("User");
-
-       User user = new User( "","@jorge", R.drawable.gogeta, null, "");
-       User user1 = new User("","@kashir", R.drawable.gogeta, null, "");
-       User user2 = new User( "","@manolo_33", R.drawable.gogeta, null, "");
-
-        String key = databaseReference.push().getKey();
-        user.setId_usuario(key);
-        databaseReference.child(key).setValue(user);
-
-        String key1 = databaseReference.push().getKey();
-        user1.setId_usuario(key1);
-        databaseReference.child(key1).setValue(user1);
-
-        String key2 = databaseReference.push().getKey();
-        user2.setId_usuario(key2);
-        databaseReference.child(key2).setValue(user2);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
