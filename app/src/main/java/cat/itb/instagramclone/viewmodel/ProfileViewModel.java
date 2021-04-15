@@ -22,13 +22,14 @@ public class ProfileViewModel extends ViewModel {
             "Que bien te ves",
             "Nice"
     };
-
+/*
     User[] users = {
             new User("", "@jorge", R.drawable.gogeta, null, ""),
             new User("", "@kashir", R.drawable.gogeta, null, ""),
             new User("", "@manolo_33", R.drawable.gogeta, null, "")
     };
-
+*/
+/*
     Publication[] publicaciones = {
             new Publication(1, new User("", "@jorge", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
             new Publication(2, new User("", "@kashir", R.drawable.lambo, null, ""), "El crack", Arrays.asList(users), R.drawable.instagram_logo, Arrays.asList(comentarios)),
@@ -47,8 +48,12 @@ public class ProfileViewModel extends ViewModel {
     };
 
 
+ */
+/*
     public ProfileViewModel() {
         //Collections.addAll(publicacionesList, publicaciones);
         user = new User("", "@gogeta55", R.drawable.gogeta, Arrays.asList(publicaciones), "Super Sayan Dios XD");
     }
+
+ */
 }

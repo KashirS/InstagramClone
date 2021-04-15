@@ -6,10 +6,11 @@
     android:layout_height="wrap_content"
     android:layout_margin="1dp">
 
+
     <ImageView
-        android:id="@+id/imagen_publicacion_search"
+        android:id="@+id/image_pub"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:adjustViewBounds="true"
-        app:srcCompat="@drawable/fb" />
+        android:src="@drawable/vegeta"
+        />
 </RelativeLayout>

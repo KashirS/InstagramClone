@@ -15,7 +15,7 @@ import cat.itb.instagramclone.models.User;
 public class ActivityViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     public static List<Notification> notificationList = new ArrayList<Notification>();
-
+/*
     Notification[] notifications = {
             new Notification(1, new User("", "@kashir22", R.drawable.vegeta, null, ""), "te empieza a seguir"),
             new Notification(2, new User("", "@manolo33", R.drawable.gohan, null, ""), "le ha dado like a tu foto"),
@@ -37,4 +37,6 @@ public class ActivityViewModel extends ViewModel {
     public ActivityViewModel() {
         Collections.addAll(notificationList, notifications);
     }
+
+ */
 }

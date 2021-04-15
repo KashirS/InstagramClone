@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="1dp">
+    android:layout_margin="1dp"
+    android:orientation="vertical"
+    >
 
-    <ImageButton
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imagen_user_story_item"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -14,8 +16,8 @@
         android:maxHeight="100dp"
         android:minWidth="100dp"
         android:minHeight="100dp"
+        android:src="@drawable/vegeta"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/fb"
         />
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/nombre_user_story_item"
@@ -24,8 +26,9 @@
         android:minWidth="100dp"
         android:maxWidth="100dp"
         android:maxHeight="20dp"
+        android:fontFamily="@font/latomedium"
         style="@style/Widget.MaterialComponents.TextView"
         android:hint="nombre Usuario"
         android:textColor="@color/black"
         android:layout_below="@+id/imagen_user_story_item"/>
-</RelativeLayout>
+</LinearLayout>

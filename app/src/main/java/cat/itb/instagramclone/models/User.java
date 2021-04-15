@@ -1,7 +1,5 @@
 package cat.itb.instagramclone.models;
 
-import android.widget.ImageView;
-
 import java.util.List;
 
 public class User {

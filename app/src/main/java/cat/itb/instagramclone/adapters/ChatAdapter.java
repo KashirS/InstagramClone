@@ -34,8 +34,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Chat c = this.chatList.get(position);
-        Drawable image = holder.itemView.getContext().getResources().getDrawable(c.getUser_chat().getImagen_usuario());
-        holder.bindData(c, image);
+        //Drawable image = holder.itemView.getContext().getResources().getDrawable(c.getUser_chat().getImagen_usuario());
+        //holder.bindData(c, image);
     }
 
     @Override
