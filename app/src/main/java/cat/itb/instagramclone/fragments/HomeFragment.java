@@ -26,12 +26,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.appbar.MaterialToolbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.activities.MainActivity;
 import cat.itb.instagramclone.adapters.PublicationAdapter;
 import cat.itb.instagramclone.adapters.StoryAdapter;
+import cat.itb.instagramclone.models.Publication;
 import cat.itb.instagramclone.viewmodel.HomeViewModel;
 
 public class HomeFragment extends Fragment{
@@ -41,6 +46,7 @@ public class HomeFragment extends Fragment{
     RecyclerView story;
     MenuItem chat_item;
     MaterialToolbar materialToolbar;
+    List<Publication> publicationList;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -60,13 +66,12 @@ public class HomeFragment extends Fragment{
         View v = inflater.inflate(R.layout.home_fragment, container, false);
         publicaciones_recyclerView = v.findViewById(R.id.home_publication_recyclerView);
         publicaciones_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        publicaciones_recyclerView.setAdapter(new PublicationAdapter(mViewModel.publicacionesList));
+        publicaciones_recyclerView.setAdapter(new PublicationAdapter(publicationList));
         materialToolbar = v.findViewById(R.id.top_app_bar);
         materialToolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
         story = v.findViewById(R.id.story_recy);
         story.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         story.setAdapter(new StoryAdapter(mViewModel.storyList));
-
         return v;
     }
 
@@ -87,6 +92,10 @@ public class HomeFragment extends Fragment{
             default: return false;
         }
 
+    }
+
+    private void buscarPublicaciones(){
+        this.publicationList = MainActivity.user.getPublications_user();
     }
 
 }
