@@ -20,6 +20,7 @@ import java.util.List;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.models.Publication;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.ViewHolder> {
     List<Publication> publicationList;
@@ -39,8 +40,8 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Publication p = this.publicationList.get(position);
         Drawable d = holder.itemView.getContext().getResources().getDrawable(p.getImagen_publicacion());
-        Drawable imageUser = holder.itemView.getContext().getResources().getDrawable(p.getUser_propietario().getImagen_usuario());
-        holder.bindData(p, d, imageUser);
+       // Drawable imageUser = holder.itemView.getContext().getResources().getDrawable(p.getUser_propietario().getImagen_usuario());
+       // holder.bindData(p, d, imageUser);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         MaterialButton nombre_usuario;
-        ImageButton image_usuario_button;
+        CircleImageView image_usuario_button;
         ImageView imagen_publicacion;
         MaterialButton num_likes_publicacion;
         MaterialButton nombre_usuario_2;
@@ -64,7 +65,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
             this.texto_usuario = itemView.findViewById(R.id.texto_usuario_textView);
             this.image_usuario_button = itemView.findViewById(R.id.imagen_usuario_button);
         }
-
+/*
         public void bindData(Publication p, Drawable imagePublicacion, Drawable imageUser){
             image_usuario_button.setImageDrawable(imageUser);
             nombre_usuario.setText(p.getUser_propietario().getNombre_usuario());
@@ -73,5 +74,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
             nombre_usuario_2.setText(p.getUser_propietario().getNombre_usuario());
             texto_usuario.setText(p.getTexto_publicacion());
         }
+
+ */
     }
 }

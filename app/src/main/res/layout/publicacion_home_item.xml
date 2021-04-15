@@ -15,13 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
-        <ImageButton
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imagen_usuario_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.12"
-            android:background="@drawable/round_shape"
-            android:src="@drawable/fb"
             android:layout_gravity="center"
 
             />
@@ -32,6 +30,7 @@
             android:layout_weight="0.7"
             android:gravity="left"
             android:textSize="20sp"
+            android:fontFamily="@font/latomedium"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -45,7 +44,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.1"
-            android:backgroundTint="@color/white"
             android:background="@drawable/publicacion_menu"
             />
     </LinearLayout>
@@ -102,6 +100,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="prueba"
+            android:fontFamily="@font/latomedium"
             android:textSize="16dp"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -118,6 +117,7 @@
             android:hint="NombreUsuario"
             android:textSize="15dp"
             android:textColor="@color/black"
+            android:fontFamily="@font/latomedium"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:backgroundTint="@color/white"
             android:textAlignment="textStart"
@@ -132,6 +132,7 @@
             android:gravity="left"
             android:textColor="@color/black"
             android:hint="Texto Usuario"
+            android:fontFamily="@font/latomedium"
             android:textSize="15dp"
             android:textAlignment="textStart"
             tools:ignore="RtlCompat" />
@@ -141,6 +142,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ver los comentarios"
+        android:fontFamily="@font/latomedium"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:textSize="15sp"
         android:backgroundTint="@color/white"/>

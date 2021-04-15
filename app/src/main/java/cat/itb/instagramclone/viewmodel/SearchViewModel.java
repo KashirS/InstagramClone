@@ -23,11 +23,11 @@ public class SearchViewModel extends ViewModel {
     };
 
     User[] users = {
-            new User("", "@jorge", 1, null, ""),
-            new User("", "@kashir", 2, null, ""),
-            new User("", "@manolo_33", 3, null, "")
+            new User("", "@jorge", "", null, ""),
+            new User("", "@kashir", "", null, ""),
+            new User("", "@manolo_33", "", null, "")
     };
-
+/*
     Publication[] searches = {
             new Publication(1, new User("", "@jorge", R.drawable.gogeta, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
             new Publication(2, new User("", "@kashir", R.drawable.vegeta, null, ""), "El crack", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
@@ -42,8 +42,11 @@ public class SearchViewModel extends ViewModel {
             new Publication(2, new User("", "@kashir", R.drawable.vegeta, null, ""), "El crack", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
             new Publication(3, new User("", "@jorge2", R.drawable.gohan, null, ""), "Postureo", Arrays.asList(users), R.drawable.gohan, Arrays.asList(comentarios))
     };
-
+*/
+/*
     public SearchViewModel() {
         Collections.addAll(searchesList, searches);
     }
+
+ */
 }

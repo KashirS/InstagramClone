@@ -23,7 +23,7 @@ public class ChatViewModel extends ViewModel {
             "Nice"
     };
 
-
+/*
     Chat[] chats = {
             new Chat(1, new User("", "@kachir1", R.drawable.gogeta, null, ""), Arrays.asList(chat)),
             new Chat(1, new User("", "@manolo22", R.drawable.broly, null, ""), Arrays.asList(chat)),
@@ -38,4 +38,6 @@ public class ChatViewModel extends ViewModel {
     public ChatViewModel() {
         Collections.addAll(chatsList, chats);
     }
+
+ */
 }

@@ -15,6 +15,7 @@ import java.util.List;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.models.Notification;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder> {
     List<Notification> notificationList;
@@ -43,7 +44,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView imagen_user_notification;
+        CircleImageView imagen_user_notification;
         MaterialTextView texto_notificacion;
 
         public ViewHolder(@NonNull View itemView) {
