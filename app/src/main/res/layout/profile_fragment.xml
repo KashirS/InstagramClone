@@ -48,12 +48,7 @@
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="173dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="116dp"
-            android:layout_toRightOf="@+id/imagen_user_profile"
+            android:layout_below="@id/imagen_user_profile"
             android:fontFamily="@font/latomedium"
             android:hint="Nombre Usuario"
             android:textSize="25dp"
@@ -65,10 +60,67 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/nombre_user_profile"
-            android:layout_toRightOf="@id/imagen_user_profile"
             android:fontFamily="@font/latomedium"
             android:hint="Descripcion Usuario"
             android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/num_pub"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/imagen_user_profile"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:text="100"
+            android:fontFamily="@font/latomedium"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/num_user_follower"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/num_pub"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="100"
+            android:fontFamily="@font/latomedium"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/num_user_follow"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@id/num_user_follower"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="100"
+            android:fontFamily="@font/latomedium"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/profile_description"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Editar perfil"
+            android:textColor="@color/black"
+            android:textSize="19dp"
+            android:fontFamily="@font/latomedium"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            />
     </RelativeLayout>
 
     <LinearLayout
