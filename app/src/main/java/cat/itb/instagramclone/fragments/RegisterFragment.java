@@ -20,6 +20,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import cat.itb.instagramclone.R;
+import cat.itb.instagramclone.activities.MainActivity;
 
 
 public class RegisterFragment extends Fragment implements View.OnClickListener{
@@ -84,14 +85,20 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.register_register:
-                verifyAll();
-                Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
+                crearusuario();
                 break;
             case R.id.login_button_register:
                 Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_loginFragment);
                 break;
         }
     }
+
+    private void crearusuario(){
+        verifyAll();
+
+        Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
+    }
+
     private void verifyAll() {
         String userVerify, passwordVerify, repeatPasswordVer, emailVerify, nameVerify, surnameVerify;
 

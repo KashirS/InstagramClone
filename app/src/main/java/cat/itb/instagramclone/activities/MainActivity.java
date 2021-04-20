@@ -29,8 +29,8 @@ import cat.itb.instagramclone.models.User;
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
     static BottomNavigationView view;
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase database;
+    public static DatabaseReference databaseReference;
+    public final static FirebaseDatabase database = FirebaseDatabase.getInstance();;
     public static User user;
     FirebaseAuth auth;
 
@@ -40,8 +40,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("User");
+        conectarFirebase();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
@@ -84,6 +83,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
+    }
+
+    private void conectarFirebase(){
+
+        databaseReference = database.getReference("User");
+
     }
 
     private void cargarUsuario(){

@@ -52,6 +52,8 @@ public class HomeFragment extends Fragment{
         return new HomeFragment();
     }
 
+    // TODO: Adapters Firebase https://www.youtube.com/watch?v=0pF9r0CsT_4
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
