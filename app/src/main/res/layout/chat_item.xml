@@ -22,6 +22,7 @@
         android:layout_toRightOf="@id/chat_user_image"
         android:fontFamily="@font/latomedium"
         android:hint="Nombre Usuario Chat"
+        android:textStyle="bold"
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="15dp" />
