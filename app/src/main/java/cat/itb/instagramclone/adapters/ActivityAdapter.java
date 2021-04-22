@@ -34,8 +34,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Notification n = this.notificationList.get(position);
-        Drawable image = holder.itemView.getContext().getResources().getDrawable(n.getUser_notification().getImagen_usuario());
-        holder.bindData(n, image);
+      //  Drawable image = holder.itemView.getContext().getResources().getDrawable(n.getUser_notification().getImagen_usuario());
+       // holder.bindData(n, image);
     }
 
     @Override

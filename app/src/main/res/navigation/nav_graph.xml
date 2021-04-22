@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_homeFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_uploadImage"
+            app:destination="@id/uploadImage" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -48,5 +51,19 @@
             android:id="@+id/action_chatFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/uploadImage"
+        android:name="cat.itb.instagramclone.fragments.UploadImage"
+        android:label="fragment_upload_image"
+        tools:layout="@layout/fragment_upload_image" >
+        <action
+            android:id="@+id/action_uploadImage_to_gallray"
+            app:destination="@id/gallray" />
+    </fragment>
+    <fragment
+        android:id="@+id/gallray"
+        android:name="cat.itb.instagramclone.fragments.gallray"
+        android:label="fragment_gallray"
+        tools:layout="@layout/fragment_gallray" />
 
 </navigation>

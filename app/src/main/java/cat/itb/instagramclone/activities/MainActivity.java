@@ -9,6 +9,7 @@ import androidx.navigation.NavController;
 
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.content.ContentResolver;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +18,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.fragments.ActivityFragment;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public static DatabaseReference databaseReference;
     public final static FirebaseDatabase database = FirebaseDatabase.getInstance();;
     public static User user;
+    public static StorageReference storageReference;
     FirebaseAuth auth;
 
     @Override
@@ -94,5 +98,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     private void cargarUsuario(){
         //TODO: Registo usuarios https://www.youtube.com/watch?v=xwhEHb_AZ6k&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&start_radio=1&t=1103
         //TODO: Login usuarios https://www.youtube.com/watch?v=IEc44_CxoyY&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&index=2
+    }
+    public ContentResolver getContentResolver(){
+        return getContentResolver();
     }
 }
