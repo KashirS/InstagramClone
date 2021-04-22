@@ -54,7 +54,7 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:3.7.0'
-
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     // implementation that's we need for proyect.
 

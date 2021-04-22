@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public static StorageReference storageReference;
     FirebaseAuth auth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);

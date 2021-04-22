@@ -33,13 +33,13 @@ public class HomeViewModel extends ViewModel {
     };
 /*
     Publication[] publicaciones = {
-            new Publication("", new User("", "@jorge", "", null, ""), "Gran dia", Arrays.asList(users), R.drawable.gohan, Arrays.asList(comentarios)),
-            new Publication("", new User("", "@kashir", "", null, ""), "El crack", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
-            new Publication("", new User("", "@jorge2", "", null, ""), "Postureo", Arrays.asList(users), R.drawable.broly, Arrays.asList(comentarios)),
-            new Publication("", new User("", "@kashir2" , "", null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
-            new Publication("", new User("", "@jorge3", "", null, ""), "Gran dia", Arrays.asList(users), R.drawable.gohan, Arrays.asList(comentarios)),
-            new Publication("", new User("", "@kashir3", "", null, ""), "Gran dia", Arrays.asList(users), R.drawable.lambo, Arrays.asList(comentarios)),
-            new Publication("", new User("", "@pepe", "", null, ""), "Gran dia", Arrays.asList(users), R.drawable.instagram_logo, Arrays.asList(comentarios)),
+            new Publication("", new User("", "@jorge", "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.gohan", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@kashir", "", null, ""), "El crack", Arrays.asList(users), "R.drawable.vegeta", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@jorge2", "", null, ""), "Postureo", Arrays.asList(users), "R.drawable.broly", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@kashir2" , "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.gogeta", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@jorge3", "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.gohan", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@kashir3", "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.lambo", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@pepe", "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.instagram_logo", Arrays.asList(comentarios)),
     };
 
  */
