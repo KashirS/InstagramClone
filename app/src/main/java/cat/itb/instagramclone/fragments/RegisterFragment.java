@@ -3,6 +3,7 @@ package cat.itb.instagramclone.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,15 +13,23 @@ import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.activities.MainActivity;
+import cat.itb.instagramclone.models.User;
 
 
 public class RegisterFragment extends Fragment implements View.OnClickListener{
@@ -85,7 +94,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.register_register:
-                crearusuario();
+                verifyAll();
                 break;
             case R.id.login_button_register:
                 Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_loginFragment);
@@ -93,14 +102,31 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void crearusuario(){
-        verifyAll();
+    private void crearusuario(String username, String password, String email, String name, String surname){
+        Map<String, User> datosUsuario = new HashMap<>();
+        User u = new User(username, password, email, name, surname, new ArrayList<String>());
+        /*datosUsuario.put("usuario", "@"+username);
+        datosUsuario.put("password", password);
+        datosUsuario.put("email", email);
+        datosUsuario.put("nombre", name);
+        datosUsuario.put("apellido", surname);*/
+        datosUsuario.put("user", u);
+        MainActivity.databaseReference.push().setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful() && task.isComplete()){
+                    Toast.makeText(getContext(), "Usuario creado", Toast.LENGTH_LONG).show();
+                }else if (task.isCanceled()){
+                    Toast.makeText(getContext(), "Cancelado", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
-        Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
     }
 
     private void verifyAll() {
         String userVerify, passwordVerify, repeatPasswordVer, emailVerify, nameVerify, surnameVerify;
+
 
         userVerify = username.getText().toString();
         passwordVerify = password.getText().toString();
@@ -138,6 +164,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
             surnameLayout.isEnabled();
         }else {
             surnameLayout.setErrorEnabled(false);
+            crearusuario(userVerify, passwordVerify, emailVerify, nameVerify, surnameVerify);
+            //Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
         }
 
     }

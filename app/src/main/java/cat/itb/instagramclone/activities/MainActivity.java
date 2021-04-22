@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public static User user;
     FirebaseAuth auth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
