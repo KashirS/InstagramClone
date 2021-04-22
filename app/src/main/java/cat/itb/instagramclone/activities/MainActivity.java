@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,9 +29,10 @@ import cat.itb.instagramclone.models.User;
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
     static BottomNavigationView view;
-
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase database;
+    public static DatabaseReference databaseReference;
+    public final static FirebaseDatabase database = FirebaseDatabase.getInstance();;
+    public static User user;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +40,15 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("User");
+        conectarFirebase();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
 
         view = findViewById(R.id.bottom_navigation);
         view.setOnNavigationItemSelectedListener(this);
+
+        //TODO: https://es.stackoverflow.com/questions/254882/android-c%C3%B3mo-reducir-tama%C3%B1o-de-un-bitmap Usos bitmap sino URL
 
     }
 
@@ -80,5 +83,16 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
+    }
+
+    private void conectarFirebase(){
+
+        databaseReference = database.getReference("User");
+
+    }
+
+    private void cargarUsuario(){
+        //TODO: Registo usuarios https://www.youtube.com/watch?v=xwhEHb_AZ6k&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&start_radio=1&t=1103
+        //TODO: Login usuarios https://www.youtube.com/watch?v=IEc44_CxoyY&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&index=2
     }
 }

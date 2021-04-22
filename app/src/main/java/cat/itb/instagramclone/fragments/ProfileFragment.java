@@ -51,7 +51,7 @@ public class ProfileFragment extends Fragment {
         profile_name.setText(mViewModel.user.getNombre_usuario());
         profile_recyclerView = v.findViewById(R.id.profile_recyclerView);
         profile_recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
-        profile_recyclerView.setAdapter(new SearchAdapter(mViewModel.user.getPublications_user()));
+        //profile_recyclerView.setAdapter(new SearchAdapter(mViewModel.user.getPublications_user()));
         return v;
     }
 
