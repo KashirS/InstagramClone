@@ -22,6 +22,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -111,9 +112,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         datosUsuario.put("nombre", name);
         datosUsuario.put("apellido", surname);*/
         datosUsuario.put("user", u);
-        MainActivity.databaseReference.push().setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+        MainActivity.databaseReference.push().setValue(datosUsuario).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+
                 if (task.isSuccessful() && task.isComplete()){
                     Toast.makeText(getContext(), "Usuario creado", Toast.LENGTH_LONG).show();
                 }else if (task.isCanceled()){

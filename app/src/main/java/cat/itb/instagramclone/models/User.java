@@ -7,6 +7,47 @@ public class User {
     String username;
     String password;
     String nombre_usuario;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getApellidos_usuario() {
+        return apellidos_usuario;
+    }
+
+    public void setApellidos_usuario(String apellidos_usuario) {
+        this.apellidos_usuario = apellidos_usuario;
+    }
+
+    public String getEmail_usuaio() {
+        return email_usuaio;
+    }
+
+    public void setEmail_usuaio(String email_usuaio) {
+        this.email_usuaio = email_usuaio;
+    }
+
+    public List<String> getUrl_publications_user() {
+        return url_publications_user;
+    }
+
+    public void setUrl_publications_user(List<String> url_publications_user) {
+        this.url_publications_user = url_publications_user;
+    }
+
     String apellidos_usuario;
     String imagen_usuario;
     String email_usuaio;
