@@ -66,14 +66,14 @@ public class HomeFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.home_fragment, container, false);
-        publicaciones_recyclerView = v.findViewById(R.id.home_publication_recyclerView);
+        /*publicaciones_recyclerView = v.findViewById(R.id.home_publication_recyclerView);
         publicaciones_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         publicaciones_recyclerView.setAdapter(new PublicationAdapter(publicationList));
         materialToolbar = v.findViewById(R.id.top_app_bar);
         materialToolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
         story = v.findViewById(R.id.story_recy);
         story.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        story.setAdapter(new StoryAdapter(mViewModel.storyList));
+        story.setAdapter(new StoryAdapter(mViewModel.storyList));*/
         return v;
     }
 

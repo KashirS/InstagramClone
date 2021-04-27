@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class UploadImage extends Fragment {
 
-    MaterialButton uploadButton;
+    ImageButton uploadButton;
     ImageView picToUpload;
     private Uri imageUri;
 
@@ -104,7 +105,8 @@ public class UploadImage extends Fragment {
 
     private String getFileExtention(Uri imageUri) {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(getActivity().getContentResolver().getType(imageUri));
+
+        return mime.getExtensionFromMimeType(getActivity().getContentResolver().getType(Uri.parse(imageUri.getPath())));
     }
 
     @Override

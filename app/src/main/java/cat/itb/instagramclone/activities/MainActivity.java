@@ -27,6 +27,7 @@ import cat.itb.instagramclone.fragments.ActivityFragment;
 import cat.itb.instagramclone.fragments.HomeFragment;
 import cat.itb.instagramclone.fragments.ProfileFragment;
 import cat.itb.instagramclone.fragments.SearchFragment;
+import cat.itb.instagramclone.fragments.UploadImage;
 import cat.itb.instagramclone.models.User;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
@@ -80,6 +81,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             case R.id.profile_icon:
                 mostrarFragmentSeleccionado(new ProfileFragment());
                 break;
+            case R.id.upload_image:
+                mostrarFragmentSeleccionado(new UploadImage());
+                break;
         }
         return true;
     }
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         //TODO: Registo usuarios https://www.youtube.com/watch?v=xwhEHb_AZ6k&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&start_radio=1&t=1103
         //TODO: Login usuarios https://www.youtube.com/watch?v=IEc44_CxoyY&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&index=2
     }
-     public ContentResolver getContentResolverFromMain(){
+    public ContentResolver getContentResolver(){
         return getContentResolver();
     }
 }
