@@ -104,7 +104,5 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         //TODO: Registo usuarios https://www.youtube.com/watch?v=xwhEHb_AZ6k&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&start_radio=1&t=1103
         //TODO: Login usuarios https://www.youtube.com/watch?v=IEc44_CxoyY&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&index=2
     }
-    public ContentResolver getContentResolver(){
-        return getContentResolver();
-    }
+
 }
