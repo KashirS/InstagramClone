@@ -8,20 +8,19 @@
 
     <ImageView
         android:id="@+id/pic_to_upload"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
 
         />
-    <com.google.android.material.button.MaterialButton
+
+    <ImageButton
         android:id="@+id/uploadimage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/pic_to_upload"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/upload_image"
-        />
+        android:layout_marginTop="100dp"
+        android:background="@drawable/upload_image" />
 
 </RelativeLayout>
