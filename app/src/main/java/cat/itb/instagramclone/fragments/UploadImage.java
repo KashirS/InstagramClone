@@ -85,7 +85,9 @@ public class UploadImage extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
 
-                        Publication publication = new Publication();
+                        Publication publication = new Publication(uri.toString());
+                        String pubId = MainActivity.databaseReference.push().getKey();
+                        MainActivity.databaseReference.child(pubId).setValue(publication);
                         Toast.makeText(getContext(),"Uploaded successfully", Toast.LENGTH_LONG).show();
                     }
                 });

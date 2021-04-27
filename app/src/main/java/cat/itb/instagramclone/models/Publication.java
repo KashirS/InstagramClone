@@ -16,6 +16,10 @@ public class Publication {
     public Publication() {
     }
 
+    public Publication(String imagen_publicacion){
+
+    }
+
     public Publication(String id_publicacion, User user_propietario, String texto_publicacion, List<User> likes_publicacion, String imagen_publicacion_id, List<String> comentarios) {
         this.id_publicacion = id_publicacion;
         this.user_propietario = user_propietario;
