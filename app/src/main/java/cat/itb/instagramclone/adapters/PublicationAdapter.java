@@ -68,12 +68,12 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         }
 
         public void bindData(Publication p, Context context){
-            Glide.with(context).load(p.getUser_propietario().getImagen_usuario()).fitCenter().centerCrop().into(image_usuario_button);
+            /*Glide.with(context).load(p.getUser_propietario().getImagen_usuario()).fitCenter().centerCrop().into(image_usuario_button);
             nombre_usuario.setText(p.getUser_propietario().getNombre_usuario());
             Glide.with(context).load(p.getImagen_publicacion()).fitCenter().centerCrop().into(imagen_publicacion);
             num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().get(0).getNombre_usuario() +" y " + p.getLikes_publicacion().size() + " usuarios más.");
             nombre_usuario_2.setText(p.getUser_propietario().getNombre_usuario());
-            texto_usuario.setText(p.getTexto_publicacion());
+            texto_usuario.setText(p.getTexto_publicacion());*/
         }
 
 

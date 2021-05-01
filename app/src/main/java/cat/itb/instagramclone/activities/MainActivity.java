@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageRegistrar;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.fragments.ActivityFragment;
@@ -32,9 +33,11 @@ import cat.itb.instagramclone.models.User;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
+    final String URL_DB = "https://instagram-clone-a09bc-default-rtdb.firebaseio.com/";
     static BottomNavigationView view;
     public static DatabaseReference databaseReference;
-    public final static FirebaseDatabase database = FirebaseDatabase.getInstance();;
+    public static DatabaseReference publicacionDBReference;
+    public static FirebaseDatabase database;
     public static User user;
     public static StorageReference storageReference;
     FirebaseAuth auth;
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     }
 
     private void conectarFirebase(){
-
+        database = FirebaseDatabase.getInstance(URL_DB);
         databaseReference = database.getReference("User");
 
     }

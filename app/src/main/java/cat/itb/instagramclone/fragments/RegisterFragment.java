@@ -1,6 +1,8 @@
 package cat.itb.instagramclone.fragments;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -104,27 +106,26 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     }
 
     private void crearusuario(String username, String password, String email, String name, String surname){
-        Map<String, User> datosUsuario = new HashMap<>();
-        User u = new User(username, password, email, name, surname, new ArrayList<String>());
-        /*datosUsuario.put("usuario", "@"+username);
+        Map<String, String> datosUsuario = new HashMap<>();
+        DatabaseReference ref = MainActivity.databaseReference.push();
+        datosUsuario.put("id_usuario", ref.getKey());
+        datosUsuario.put("username", "@"+username);
         datosUsuario.put("password", password);
-        datosUsuario.put("email", email);
-        datosUsuario.put("nombre", name);
-        datosUsuario.put("apellido", surname);*/
-        datosUsuario.put("user", u);
+        datosUsuario.put("email_usuario", email);
+        datosUsuario.put("nombre_usuario", name);
+        datosUsuario.put("apellidos_usuario", surname);
+        //datosUsuario.put("publicaciones",new ArrayList<String>());
 
-        MainActivity.databaseReference.push().setValue(datosUsuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+        ref.setValue(datosUsuario).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-
-                if (task.isSuccessful() && task.isComplete()){
-                    Toast.makeText(getContext(), "Usuario creado", Toast.LENGTH_LONG).show();
+                if (task.isComplete()){
+                    Toast.makeText(getContext(),"Usuario Creado",Toast.LENGTH_LONG).show();
                 }else if (task.isCanceled()){
-                    Toast.makeText(getContext(), "Cancelado", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Usuario Cancelado",Toast.LENGTH_LONG).show();
                 }
             }
         });
-
     }
 
     private void verifyAll() {
@@ -139,30 +140,37 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         surnameVerify = surname.getText().toString();
 
         if (userVerify.isEmpty()){
+            usernameLayout.setErrorTextColor(ColorStateList.valueOf(Color.RED));
             usernameLayout.setError("required field");
             usernameLayout.isEnabled();
         }else if (passwordVerify.isEmpty()){
             usernameLayout.setErrorEnabled(false);
+            passwordLayout.setErrorTextColor(ColorStateList.valueOf(Color.RED));
             passwordLayout.setError("required field");
             passwordLayout.isEnabled();
         }else if (repeatPasswordVer.isEmpty()){
             passwordLayout.setErrorEnabled(false);
+            passwordLayout.setErrorTextColor(ColorStateList.valueOf(Color.RED));
             repeatPasswordLayout.setError("required field");
             repeatPasswordLayout.isEnabled();
         }else if (!(passwordVerify.equals(passwordVerify))){
             repeatPasswordLayout.setErrorEnabled(false);
+            repeatPasswordLayout.setErrorTextColor(ColorStateList.valueOf(Color.RED));
             repeatPasswordLayout.setError("password isn't equal");
             repeatPasswordLayout.isEnabled();
         }else if (emailVerify.isEmpty()){
             repeatPasswordLayout.setErrorEnabled(false);
+            emailLayout.setErrorTextColor(ColorStateList.valueOf(Color.RED));
             emailLayout.setError("required field");
             emailLayout.isEnabled();
         }else if (nameVerify.isEmpty()){
             emailLayout.setErrorEnabled(false);
+            nameLayout.setErrorTextColor(ColorStateList.valueOf(Color.RED));
             nameLayout.setError("required field");
             nameLayout.isEnabled();
         }else if (surnameVerify.isEmpty()){
             nameLayout.setErrorEnabled(false);
+            surnameLayout.setErrorTextColor(ColorStateList.valueOf(Color.RED));
             surnameLayout.setError("required field");
             surnameLayout.isEnabled();
         }else {

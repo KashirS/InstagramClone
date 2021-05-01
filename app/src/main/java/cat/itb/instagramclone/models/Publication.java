@@ -7,16 +7,16 @@ import java.util.List;
 
 public class Publication {
     String id_publicacion;
-    User user_propietario;
+    String user_propietario;
     String texto_publicacion;
-    List<User> likes_publicacion;
+    List<String> likes_publicacion;
     String imagen_publicacion;
     List<String> comentarios;
 
     public Publication() {
     }
 
-    public Publication(String id_publicacion, User user_propietario, String texto_publicacion, List<User> likes_publicacion, String imagen_publicacion_id, List<String> comentarios) {
+    public Publication(String id_publicacion, String user_propietario, String texto_publicacion, List<String> likes_publicacion, String imagen_publicacion_id, List<String> comentarios) {
         this.id_publicacion = id_publicacion;
         this.user_propietario = user_propietario;
         this.texto_publicacion = texto_publicacion;
@@ -25,11 +25,11 @@ public class Publication {
         this.comentarios = comentarios;
     }
 
-    public List<User> getLikes_publicacion() {
+    public List<String> getLikes_publicacion() {
         return likes_publicacion;
     }
 
-    public void setLikes_publicacion(List<User> likes_publicacion) {
+    public void setLikes_publicacion(List<String> likes_publicacion) {
         this.likes_publicacion = likes_publicacion;
     }
 
@@ -41,12 +41,8 @@ public class Publication {
         this.id_publicacion = id_publicacion;
     }
 
-    public User getUser_propietario() {
+    public String getUser_propietario() {
         return user_propietario;
-    }
-
-    public void setUser_propietario(User user_propietario) {
-        this.user_propietario = user_propietario;
     }
 
     public String getTexto_publicacion() {
@@ -71,5 +67,9 @@ public class Publication {
 
     public void setComentarios(List<String> comentarios) {
         this.comentarios = comentarios;
+    }
+
+    public void setUser_propietario(String user_propietario) {
+        this.user_propietario = user_propietario;
     }
 }
