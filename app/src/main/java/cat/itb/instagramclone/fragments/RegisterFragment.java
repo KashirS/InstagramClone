@@ -24,18 +24,24 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
+import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.activities.MainActivity;
+import cat.itb.instagramclone.models.Publication;
 import cat.itb.instagramclone.models.User;
 
 
-public class RegisterFragment extends Fragment implements View.OnClickListener, OnCompleteListener{
+public class RegisterFragment extends Fragment implements View.OnClickListener, OnCompleteListener, ValueEventListener {
 
     private TextInputEditText username;
     private TextInputLayout usernameLayout;
@@ -53,6 +59,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     private MaterialButton register;
     private MaterialButton login;
     boolean creado = false;
+    List<String> userlist_creada;
+    List<String> comentlist_creada;
+    List<String> url_publicationlist;
+    List<Publication> publicationList;
+    final String POR_DEFECTO_URL_IMAGE = "https://firebasestorage.googleapis.com/v0/b/instagram-clone-a09bc.appspot.com/o/image%2Fimagen_predeterminada.png?alt=media&token=b87d6c5d-34d7-4507-b0fc-616b83ec8bf8";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -114,9 +125,23 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         datosUsuario.put("email_usuario", email);
         datosUsuario.put("nombre_usuario", name);
         datosUsuario.put("apellidos_usuario", surname);
-        //datosUsuario.put("publicaciones",new ArrayList<String>());
+        datosUsuario.put("imagen_usuario", POR_DEFECTO_URL_IMAGE);
+        ref.setValue(datosUsuario);
+        ref.child("Publicaciones").setValue(crearMapPublicaciones()).addOnCompleteListener(this);
+        getPublicaciones();
+        MainActivity.user = new User(ref.getKey(),username, password, name, surname, POR_DEFECTO_URL_IMAGE, email, url_publicationlist, publicationList, "");
 
-        ref.setValue(datosUsuario).addOnCompleteListener(this);
+    }
+
+    public void getPublicaciones(){
+        MainActivity.publicacionDBReference.addValueEventListener(this);
+    }
+
+
+    private Map<String, String> crearMapPublicaciones(){
+        Map<String, String> datosPublicaiones = new HashMap<>();
+        datosPublicaiones.put("id","-MZijMVqgkXEsLuvzL3F");
+        return datosPublicaiones;
     }
 
     private void verifyAll() {
@@ -166,6 +191,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             surnameLayout.setErrorEnabled(false);
             crearusuario(userVerify, passwordVerify, emailVerify, nameVerify, surnameVerify);
             if (creado){
+                Toast.makeText(getContext(),"Navegando...",Toast.LENGTH_LONG).show();
                 Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
             }
         }
@@ -175,11 +201,41 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onComplete(@NonNull Task task) {
         if (task.isComplete()){
-            Toast.makeText(getContext(),"Usuario Creado",Toast.LENGTH_LONG).show();
             creado = true;
+            Toast.makeText(getContext(),"Usuario Creado",Toast.LENGTH_LONG).show();
         }else if (task.isCanceled()){
-            Toast.makeText(getContext(),"Usuario Cancelado",Toast.LENGTH_LONG).show();
             creado = false;
+            Toast.makeText(getContext(),"Usuario Cancelado",Toast.LENGTH_LONG).show();
+
         }
+    }
+
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if (snapshot.exists()){
+            userlist_creada = new ArrayList<String>();
+            comentlist_creada = new ArrayList<>();
+            String id = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("id_publicacion").getValue().toString();
+            String imagen = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("imagen_usuario").getValue().toString();
+            String texto = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("texto_publicacion").getValue().toString();
+            String user = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("user_propietario").getValue().toString();
+            for (DataSnapshot ds : snapshot.child("-MZijMVqgkXEsLuvzL3F").child("Comentarios").getChildren()){
+                String com = ds.getValue().toString();
+                comentlist_creada.add(com);
+            }
+            for (DataSnapshot dataS : snapshot.child("-MZijMVqgkXEsLuvzL3F").child("Likes").getChildren()){
+                String username = dataS.getValue().toString();
+                userlist_creada.add(username);
+            }
+            publicationList = new ArrayList<>();
+            url_publicationlist = new ArrayList<>();
+            publicationList.add(new Publication(id, user, texto, userlist_creada, imagen, comentlist_creada));
+            url_publicationlist.add(id);
+        }
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
     }
 }

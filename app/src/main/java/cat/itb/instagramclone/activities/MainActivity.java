@@ -34,6 +34,8 @@ import cat.itb.instagramclone.models.User;
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
 
     final String URL_DB = "https://instagram-clone-a09bc-default-rtdb.firebaseio.com/";
+    final String REF_USER_DB = "User";
+    final String REF_PUBLIC_DB = "Publicaciones";
     static BottomNavigationView view;
     public static DatabaseReference databaseReference;
     public static DatabaseReference publicacionDBReference;
@@ -99,7 +101,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     private void conectarFirebase(){
         database = FirebaseDatabase.getInstance(URL_DB);
-        databaseReference = database.getReference("User");
+        databaseReference = database.getReference(REF_USER_DB);
+        publicacionDBReference = database.getReference(REF_PUBLIC_DB);
 
     }
 

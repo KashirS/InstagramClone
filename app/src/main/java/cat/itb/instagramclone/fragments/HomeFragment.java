@@ -72,12 +72,13 @@ public class HomeFragment extends Fragment{
         View v = inflater.inflate(R.layout.home_fragment, container, false);
         publicaciones_recyclerView = v.findViewById(R.id.home_publication_recyclerView);
         publicaciones_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        publicaciones_recyclerView.setAdapter(new PublicationAdapter(publicationList));
+        publicaciones_recyclerView.setAdapter(new PublicationAdapter(MainActivity.user.getPublications_user()));
         materialToolbar = v.findViewById(R.id.top_app_bar);
         materialToolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
         story = v.findViewById(R.id.story_recy);
         story.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         //story.setAdapter(new StoryAdapter());
+
         return v;
     }
 
@@ -107,7 +108,6 @@ public class HomeFragment extends Fragment{
 
             }
         });
-
         return new ArrayList<User>();
     }
 

@@ -20,12 +20,15 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.activities.MainActivity;
+import cat.itb.instagramclone.models.Publication;
 import cat.itb.instagramclone.models.User;
 
 
@@ -42,6 +45,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
     String log_name;
     String log_password;
     boolean logeado = false;
+    List<String> userlist_likes;
+    List<String> comentlist_publi;
+    Publication publication_creada;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -131,22 +137,59 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
         editor.commit();
     }
 
+    public Publication findPublication(String id){
+        MainActivity.publicacionDBReference.child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    String user_id = snapshot.child("id_publicacion").getValue().toString();
+                    String imagen = snapshot.child("imagen_usuario").getValue().toString();
+                    String texto = snapshot.child("texto_publicacion").getValue().toString();
+                    String user = snapshot.child("user_propietario").getValue().toString();
+                    comentlist_publi = new ArrayList<>();
+                    userlist_likes = new ArrayList<>();
+                    for (DataSnapshot ds : snapshot.child("Comentarios").getChildren()){
+                        String com = ds.getValue().toString();
+                        comentlist_publi.add(com);
+                    }
+                    for (DataSnapshot dataS : snapshot.child("Likes").getChildren()){
+                        String username = dataS.getValue().toString();
+                        userlist_likes.add(username);
+                    }
+                    publication_creada = new Publication(user_id, user, texto, userlist_likes, imagen, comentlist_publi);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return publication_creada;
+    }
+
     @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {
         if (snapshot.exists()){
-            for (DataSnapshot ds : snapshot.getChildren()){
-                String id = ds.getValue().toString();
-                String username = ds.child("username").getValue().toString();
-                String password = ds.child("password").getValue().toString();
-                String email = ds.child("email_usuario").getValue().toString();
-                String name = ds.child("nombre_usuario").getValue().toString();
-                String apellido = ds.child("apellidos_usuario").getValue().toString();
-                if (username.equals("@"+log_name) && password.equals(log_password)){
-                    logUser = new User(id, username, password, email, name, apellido);
-                    Toast.makeText(getContext(), "Log In", Toast.LENGTH_LONG).show();
-                    logeado = true;
+                List<Publication> publicationList = new ArrayList<>();
+                List<String> idPublicationList = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    String id = ds.getValue().toString();
+                    String username = ds.child("username").getValue().toString();
+                    String password = ds.child("password").getValue().toString();
+                    String email = ds.child("email_usuario").getValue().toString();
+                    String name = ds.child("nombre_usuario").getValue().toString();
+                    String apellido = ds.child("apellidos_usuario").getValue().toString();
+                    for(DataSnapshot dataPublicaciones : ds.child("Publicaciones").getChildren()){
+                        String id_publi = dataPublicaciones.getValue().toString();
+                        publicationList.add(findPublication(id_publi));
+                    }
+                    if (username.equals("@"+log_name) && password.equals(log_password)){
+                        logUser = new User(id, username, password, email, name, apellido);
+                        Toast.makeText(getContext(), "Log In", Toast.LENGTH_LONG).show();
+                        logeado = true;
+                    }
                 }
-            }
         }
     }
 
