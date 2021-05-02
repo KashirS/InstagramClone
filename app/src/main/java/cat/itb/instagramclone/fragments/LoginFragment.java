@@ -29,7 +29,7 @@ import cat.itb.instagramclone.activities.MainActivity;
 import cat.itb.instagramclone.models.User;
 
 
-public class LoginFragment extends Fragment implements View.OnClickListener{
+public class LoginFragment extends Fragment implements View.OnClickListener, ValueEventListener{
 
     private TextInputEditText username;
     private TextInputEditText password;
@@ -39,6 +39,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     private TextInputLayout userInput;
     private TextInputLayout passInput;
     User logUser;
+    String log_name;
+    String log_password;
+    boolean logeado = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,34 +82,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public void getUsuarioLogIn(String log_username, String log_password){
-
-        MainActivity.databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    for (DataSnapshot ds : snapshot.getChildren()){
-                        String id = ds.getValue().toString();
-                        String username = ds.child("username").getValue().toString();
-                        String password = ds.child("password").getValue().toString();
-                        String email = ds.child("email_usuario").getValue().toString();
-                        String name = ds.child("nombre_usuario").getValue().toString();
-                        String apellido = ds.child("apellidos_usuario").getValue().toString();
-                        Toast.makeText(getContext(), ""+username, Toast.LENGTH_LONG).show();
-                        if (username.equals("@"+log_username) && password.equals(log_password)){
-                            logUser = new User(id, username, password, email, name, apellido);
-                            Toast.makeText(getContext(), "Log In", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "ERROR: "+error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
+    public void getUsuarioLogIn(){
+        MainActivity.databaseReference.addValueEventListener(this);
     }
 
     private void verifier() {
@@ -128,9 +105,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             passInput.setError("min 8 character");
             passInput.isEnabled();
         }else {
+            log_name = usernameVerify;
+            log_password = passwordVerify;
             guardarPreferencias(usernameVerify, passwordVerify);
-            getUsuarioLogIn(usernameVerify, passwordVerify);
-            //Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
+            getUsuarioLogIn();
+            if (logeado){
+                Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
+            }
         }
     }
     private void cargarPreferencias(){
@@ -150,4 +131,27 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         editor.commit();
     }
 
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if (snapshot.exists()){
+            for (DataSnapshot ds : snapshot.getChildren()){
+                String id = ds.getValue().toString();
+                String username = ds.child("username").getValue().toString();
+                String password = ds.child("password").getValue().toString();
+                String email = ds.child("email_usuario").getValue().toString();
+                String name = ds.child("nombre_usuario").getValue().toString();
+                String apellido = ds.child("apellidos_usuario").getValue().toString();
+                if (username.equals("@"+log_name) && password.equals(log_password)){
+                    logUser = new User(id, username, password, email, name, apellido);
+                    Toast.makeText(getContext(), "Log In", Toast.LENGTH_LONG).show();
+                    logeado = true;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+        Toast.makeText(getContext(), "ERROR: "+error.getMessage(), Toast.LENGTH_LONG).show();
+    }
 }

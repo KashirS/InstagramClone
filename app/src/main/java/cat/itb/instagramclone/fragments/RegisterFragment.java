@@ -35,7 +35,7 @@ import cat.itb.instagramclone.activities.MainActivity;
 import cat.itb.instagramclone.models.User;
 
 
-public class RegisterFragment extends Fragment implements View.OnClickListener{
+public class RegisterFragment extends Fragment implements View.OnClickListener, OnCompleteListener{
 
     private TextInputEditText username;
     private TextInputLayout usernameLayout;
@@ -52,11 +52,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     private MaterialCheckBox terms;
     private MaterialButton register;
     private MaterialButton login;
+    boolean creado = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -116,22 +116,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         datosUsuario.put("apellidos_usuario", surname);
         //datosUsuario.put("publicaciones",new ArrayList<String>());
 
-        ref.setValue(datosUsuario).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isComplete()){
-                    Toast.makeText(getContext(),"Usuario Creado",Toast.LENGTH_LONG).show();
-                }else if (task.isCanceled()){
-                    Toast.makeText(getContext(),"Usuario Cancelado",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        ref.setValue(datosUsuario).addOnCompleteListener(this);
     }
 
     private void verifyAll() {
         String userVerify, passwordVerify, repeatPasswordVer, emailVerify, nameVerify, surnameVerify;
-
-
         userVerify = username.getText().toString();
         passwordVerify = password.getText().toString();
         repeatPasswordVer = repeatPassword.getText().toString();
@@ -176,8 +165,21 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         }else {
             surnameLayout.setErrorEnabled(false);
             crearusuario(userVerify, passwordVerify, emailVerify, nameVerify, surnameVerify);
-            //Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
+            if (creado){
+                Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
+            }
         }
 
+    }
+
+    @Override
+    public void onComplete(@NonNull Task task) {
+        if (task.isComplete()){
+            Toast.makeText(getContext(),"Usuario Creado",Toast.LENGTH_LONG).show();
+            creado = true;
+        }else if (task.isCanceled()){
+            Toast.makeText(getContext(),"Usuario Cancelado",Toast.LENGTH_LONG).show();
+            creado = false;
+        }
     }
 }
