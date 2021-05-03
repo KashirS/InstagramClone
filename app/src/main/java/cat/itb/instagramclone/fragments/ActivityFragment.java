@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import cat.itb.instagramclone.R;
+import cat.itb.instagramclone.activities.MainActivity;
 import cat.itb.instagramclone.adapters.ActivityAdapter;
 import cat.itb.instagramclone.viewmodel.ActivityViewModel;
 

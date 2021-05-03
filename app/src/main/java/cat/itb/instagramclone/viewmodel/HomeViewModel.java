@@ -19,7 +19,6 @@ public class HomeViewModel extends ViewModel {
     public static List<Publication> publicacionesList = new ArrayList<Publication>();
     public static List<Story> storyList = new ArrayList<Story>();
 
-
     String[] comentarios = {
             "Gran foto",
             "Me encanta",
@@ -28,21 +27,22 @@ public class HomeViewModel extends ViewModel {
     };
 
     User[] users = {
-            new User(1, "@jorge", R.drawable.gogeta, null, ""),
-            new User(2, "@kashir", R.drawable.gogeta, null, ""),
-            new User(3, "@manolo_33", R.drawable.gogeta, null, "")
+            new User( "","@jorge", "", null, ""),
+            new User("","@kashir", "", null, ""),
+            new User( "","@manolo_33", "", null, "")
     };
-
+/*
     Publication[] publicaciones = {
-            new Publication(1, new User(1, "@jorge", R.drawable.gohan, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gohan, Arrays.asList(comentarios)),
-            new Publication(2, new User(2, "@kashir", R.drawable.vegeta, null, ""), "El crack", Arrays.asList(users), R.drawable.vegeta, Arrays.asList(comentarios)),
-            new Publication(3, new User(3, "@jorge2", R.drawable.broly, null, ""), "Postureo", Arrays.asList(users), R.drawable.broly, Arrays.asList(comentarios)),
-            new Publication(4, new User(4, "@kashir2" , R.drawable.gogeta, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),
-            new Publication(5, new User(5, "@jorge3", R.drawable.gohan, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gohan, Arrays.asList(comentarios)),
-            new Publication(6, new User(6, "@kashir3", R.drawable.lambo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.lambo, Arrays.asList(comentarios)),
-            new Publication(7, new User(7, "@pepe", R.drawable.instagram_logo, null, ""), "Gran dia", Arrays.asList(users), R.drawable.instagram_logo, Arrays.asList(comentarios)),
+            new Publication("", new User("", "@jorge", "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.gohan", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@kashir", "", null, ""), "El crack", Arrays.asList(users), "R.drawable.vegeta", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@jorge2", "", null, ""), "Postureo", Arrays.asList(users), "R.drawable.broly", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@kashir2" , "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.gogeta", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@jorge3", "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.gohan", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@kashir3", "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.lambo", Arrays.asList(comentarios)),
+            new Publication("", new User("", "@pepe", "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.instagram_logo", Arrays.asList(comentarios)),
     };
 
+ */
 
     Integer [] histori= {
             R.drawable.gogeta,
@@ -51,18 +51,20 @@ public class HomeViewModel extends ViewModel {
     };
 
     Story[] historis = {
-            new Story(1, new User(R.drawable.gogeta, "@jorge22", R.drawable.vegeta, null, ""), Arrays.asList(histori)),
-            new Story(2, new User(R.drawable.gogeta, "@kashir33", R.drawable.broly, null, ""), Arrays.asList(histori)),
-            new Story(3, new User(R.drawable.gogeta, "@jorge1", R.drawable.gohan, null, ""), Arrays.asList(histori)),
-            new Story(4, new User(R.drawable.gogeta, "@kashi2r", R.drawable.instagram_logo,null, ""), Arrays.asList(histori)),
-            new Story(5, new User(R.drawable.gogeta, "@jorge", R.drawable.gogeta,null, ""), Arrays.asList(histori)),
-            new Story(6, new User(R.drawable.gogeta, "@kashir", R.drawable.vegeta, null, ""), Arrays.asList(histori)),
-            new Story(7, new User(R.drawable.gogeta, "@manolooo22", R.drawable.broly, null, ""), Arrays.asList(histori))
+            new Story(1, new User("", "@jorge22", "", null, ""), Arrays.asList(histori)),
+            new Story(2, new User("", "@kashir33", "", null, ""), Arrays.asList(histori)),
+            new Story(3, new User("", "@jorge1", "", null, ""), Arrays.asList(histori)),
+            new Story(4, new User("", "@kashi2r", "",null, ""), Arrays.asList(histori)),
+            new Story(5, new User("", "@jorge", "",null, ""), Arrays.asList(histori)),
+            new Story(6, new User("", "@kashir", "", null, ""), Arrays.asList(histori)),
+            new Story(7, new User("", "@manolooo22", "", null, ""), Arrays.asList(histori))
     };
-
+/*
     public HomeViewModel() {
         Collections.addAll(publicacionesList, publicaciones);
-        Collections.addAll(storyList, historis);
+        Collections.addAll(storyList);
 
     }
+
+ */
 }

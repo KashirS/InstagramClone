@@ -12,6 +12,11 @@
         android:title="Search"
         android:icon="@drawable/search"
         />
+    <item android:id="@+id/upload_image"
+        android:enabled="true"
+        android:title="Upload Image"
+        android:icon="@drawable/add_image"
+        />
     <item android:id="@+id/activity_icon"
         android:enabled="true"
         android:title="Activity"
