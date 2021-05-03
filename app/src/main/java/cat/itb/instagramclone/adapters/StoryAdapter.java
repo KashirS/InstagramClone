@@ -18,6 +18,7 @@ import java.util.List;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.models.Story;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
     List<Story> storyList;
@@ -36,9 +37,9 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Story s = this.storyList.get(position);
-        Drawable d = holder.itemView.getContext().getResources().getDrawable(s.getUser_story().getImagen_usuario());
+      //  Drawable d = holder.itemView.getContext().getResources().getDrawable(s.getUser_story().getImagen_usuario());
 
-        holder.bindData(s, d);
+      //  holder.bindData(s, d);
     }
 
     @Override
@@ -47,7 +48,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageButton imagen_usuario;
+        CircleImageView imagen_usuario;
         MaterialTextView nombre_usuario;
 
         public ViewHolder(@NonNull View itemView) {

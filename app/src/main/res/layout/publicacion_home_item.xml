@@ -15,13 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
-        <ImageButton
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imagen_usuario_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:background="@drawable/image_roundcorner"
-            android:src="@drawable/fb"
+            android:layout_weight="0.12"
+            android:layout_gravity="center"
+
             />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nombre_usuario_button"
@@ -30,6 +30,7 @@
             android:layout_weight="0.7"
             android:gravity="left"
             android:textSize="20sp"
+            android:fontFamily="@font/latomedium"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -37,11 +38,13 @@
             android:text="user_name"
             android:textColor="@color/black"
             />
-        <Button
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/opciones_publicacion"
-            android:layout_width="40sp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:icon="@drawable/publicacion_menu"
+            android:layout_weight="0.1"
+            android:background="@drawable/publicacion_menu"
             />
     </LinearLayout>
     <RelativeLayout
@@ -53,7 +56,7 @@
             android:layout_height="match_parent"
             android:maxHeight="300dp"/>
     </RelativeLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
@@ -63,20 +66,30 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:src="@drawable/heart_like_image"
+            android:visibility="invisible"
+            />
+        <ImageButton
+            android:id="@+id/dislike_publicacion_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/heart_dislike"
             />
         <ImageButton
             android:id="@+id/comentarios_publicacion_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
+            android:layout_toRightOf="@id/like_publicacion_button"
             app:srcCompat="@android:drawable/sym_action_chat" />
         <ImageButton
             android:id="@+id/compartir_publicacion_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
+            android:layout_toRightOf="@id/comentarios_publicacion_button"
             app:srcCompat="@android:drawable/ic_menu_send" />
-    </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -87,6 +100,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:text="prueba"
+            android:fontFamily="@font/latomedium"
             android:textSize="16dp"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -103,6 +117,7 @@
             android:hint="NombreUsuario"
             android:textSize="15dp"
             android:textColor="@color/black"
+            android:fontFamily="@font/latomedium"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:backgroundTint="@color/white"
             android:textAlignment="textStart"
@@ -117,6 +132,7 @@
             android:gravity="left"
             android:textColor="@color/black"
             android:hint="Texto Usuario"
+            android:fontFamily="@font/latomedium"
             android:textSize="15dp"
             android:textAlignment="textStart"
             tools:ignore="RtlCompat" />
@@ -126,6 +142,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ver los comentarios"
+        android:fontFamily="@font/latomedium"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:textSize="15sp"
         android:backgroundTint="@color/white"/>

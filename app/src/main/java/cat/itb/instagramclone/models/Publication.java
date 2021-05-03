@@ -6,17 +6,21 @@ import android.widget.ImageView;
 import java.util.List;
 
 public class Publication {
-    int id_publicacion;
+    String id_publicacion;
     User user_propietario;
     String texto_publicacion;
     List<User> likes_publicacion;
-    int imagen_publicacion;
+    String imagen_publicacion;
     List<String> comentarios;
 
     public Publication() {
     }
 
-    public Publication(int id_publicacion, User user_propietario, String texto_publicacion, List<User> likes_publicacion, int imagen_publicacion_id, List<String> comentarios) {
+    public Publication(String imagen_publicacion){
+
+    }
+
+    public Publication(String id_publicacion, User user_propietario, String texto_publicacion, List<User> likes_publicacion, String imagen_publicacion_id, List<String> comentarios) {
         this.id_publicacion = id_publicacion;
         this.user_propietario = user_propietario;
         this.texto_publicacion = texto_publicacion;
@@ -33,11 +37,11 @@ public class Publication {
         this.likes_publicacion = likes_publicacion;
     }
 
-    public int getId_publicacion() {
+    public String getId_publicacion() {
         return id_publicacion;
     }
 
-    public void setId_publicacion(int id_publicacion) {
+    public void setId_publicacion(String id_publicacion) {
         this.id_publicacion = id_publicacion;
     }
 
@@ -57,11 +61,11 @@ public class Publication {
         this.texto_publicacion = texto_publicacion;
     }
 
-    public int getImagen_publicacion() {
+    public String getImagen_publicacion() {
         return imagen_publicacion;
     }
 
-    public void setImagen_publicacion(int imagen_publicacion) {
+    public void setImagen_publicacion(String imagen_publicacion) {
         this.imagen_publicacion = imagen_publicacion;
     }
 

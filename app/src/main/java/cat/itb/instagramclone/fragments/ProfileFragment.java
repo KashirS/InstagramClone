@@ -44,14 +44,14 @@ public class ProfileFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.profile_fragment, container, false);
         profile_image = v.findViewById(R.id.imagen_user_profile);
-        profile_image.setImageDrawable(getResources().getDrawable(mViewModel.user.getImagen_usuario()));
+       // profile_image.setImageDrawable(getResources().getDrawable(mViewModel.user.getImagen_usuario()));
         profile_description = v.findViewById(R.id.profile_description);
         profile_description.setText(mViewModel.user.getDescripcion_user());
         profile_name = v.findViewById(R.id.nombre_user_profile);
         profile_name.setText(mViewModel.user.getNombre_usuario());
         profile_recyclerView = v.findViewById(R.id.profile_recyclerView);
         profile_recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
-        profile_recyclerView.setAdapter(new SearchAdapter(mViewModel.user.getPublications_user()));
+        //profile_recyclerView.setAdapter(new SearchAdapter(mViewModel.user.getPublications_user()));
         return v;
     }
 
