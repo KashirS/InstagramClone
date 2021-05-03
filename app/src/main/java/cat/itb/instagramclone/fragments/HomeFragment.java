@@ -89,17 +89,23 @@ public class HomeFragment extends Fragment{
                 if (snapshot.exists()){
                     publicationList = new ArrayList<>();
                     for (DataSnapshot ds : snapshot.getChildren()){
-                        String id = ds.getValue().toString();
-                        String user_id = MainActivity.user.getId_usuario();
-                        String username = ds.child("username").getValue().toString();
-                        String password = ds.child("password").getValue().toString();
-                        String email = ds.child("email_usuario").getValue().toString();
-                        String name = ds.child("nombre_usuario").getValue().toString();
-                        String apellido = ds.child("apellido_usuario").getValue().toString();
-                        //publicationList.add(new Publication(id, user_id, ));
+                        List<String> comentList = new ArrayList<>();
+                        List<String> likeList = new ArrayList<>();
+                        String id_publi = ds.child("id_publicacion").getValue().toString();
+                        String imagen = ds.child("imagen_usuario").getValue().toString();
+                        String texto = ds.child("texto_publicacion").getValue().toString();
+                        String user = ds.child("user_propietario").getValue().toString();
+                        for (DataSnapshot dataComent : snapshot.child("Comentarios").getChildren()){
+                            String com = dataComent.getValue().toString();
+                            comentList.add(com);
+                        }
+                        for (DataSnapshot dataLike : snapshot.child("Likes").getChildren()){
+                            String username_like = dataLike.getValue().toString();
+                            likeList.add(username_like);
+                        }
+                        publicationList.add(new Publication(id_publi, user, texto, likeList, imagen, comentList));
                     }
 
-                    //publicationList.addAll(snapshot.getChildren());
                 }
             }
 

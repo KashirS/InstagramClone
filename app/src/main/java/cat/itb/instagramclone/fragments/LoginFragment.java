@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +68,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
         register = v.findViewById(R.id.register_button_login);
         userInput = v.findViewById(R.id.user_name_login);
         passInput = v.findViewById(R.id.user_password_login);
-
-
         login.setOnClickListener(this::onClick);
         register.setOnClickListener(this::onClick);
         cargarPreferencias();
@@ -115,7 +114,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
             log_password = passwordVerify;
             guardarPreferencias(usernameVerify, passwordVerify);
             getUsuarioLogIn();
+            MainActivity.user = logUser;
             if (logeado){
+                Toast.makeText(getContext(),"Loged", Toast.LENGTH_LONG).show();
                 Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
             }
         }
@@ -180,12 +181,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
                     String email = ds.child("email_usuario").getValue().toString();
                     String name = ds.child("nombre_usuario").getValue().toString();
                     String apellido = ds.child("apellidos_usuario").getValue().toString();
+                    String descripcion = ds.child("descripcion_usuario").getValue().toString();
+                    String imagen = ds.child("imagen_usuario").getValue().toString();
                     for(DataSnapshot dataPublicaciones : ds.child("Publicaciones").getChildren()){
                         String id_publi = dataPublicaciones.getValue().toString();
                         publicationList.add(findPublication(id_publi));
                     }
                     if (username.equals("@"+log_name) && password.equals(log_password)){
-                        logUser = new User(id, username, password, email, name, apellido);
+                        logUser = new User(id, username, password, name, apellido, imagen, email, idPublicationList, publicationList, descripcion);
                         Toast.makeText(getContext(), "Log In", Toast.LENGTH_LONG).show();
                         logeado = true;
                     }

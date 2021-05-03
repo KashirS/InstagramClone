@@ -18,15 +18,21 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 import cat.itb.instagramclone.R;
+import cat.itb.instagramclone.activities.MainActivity;
 import cat.itb.instagramclone.models.Publication;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.ViewHolder>{
+public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.ViewHolder> implements ValueEventListener{
     List<Publication> publicationList;
+    String imagen_user;
 
     public PublicationAdapter(List<Publication> publicationList) {
         this.publicationList = publicationList;
@@ -50,6 +56,18 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         return this.publicationList.size();
     }
 
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if (snapshot.exists()){
+            imagen_user = snapshot.child("imagen_usuario").getValue().toString();
+        }
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         MaterialButton nombre_usuario;
         CircleImageView image_usuario_button;
@@ -68,12 +86,13 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         }
 
         public void bindData(Publication p, Context context){
-            /*Glide.with(context).load(p.getUser_propietario().getImagen_usuario()).fitCenter().centerCrop().into(image_usuario_button);
-            nombre_usuario.setText(p.getUser_propietario().getNombre_usuario());
+            MainActivity.databaseReference.child(p.getUser_propietario()).addValueEventListener(this);
+            Glide.with(context).load(imagen_user).fitCenter().centerCrop().into(image_usuario_button);
+            nombre_usuario.setText(p.getUser_propietario());
             Glide.with(context).load(p.getImagen_publicacion()).fitCenter().centerCrop().into(imagen_publicacion);
             num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().get(0).getNombre_usuario() +" y " + p.getLikes_publicacion().size() + " usuarios más.");
             nombre_usuario_2.setText(p.getUser_propietario().getNombre_usuario());
-            texto_usuario.setText(p.getTexto_publicacion());*/
+            texto_usuario.setText(p.getTexto_publicacion());
         }
 
 

@@ -125,6 +125,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         datosUsuario.put("email_usuario", email);
         datosUsuario.put("nombre_usuario", name);
         datosUsuario.put("apellidos_usuario", surname);
+        datosUsuario.put("descripcion_usuario", "");
         datosUsuario.put("imagen_usuario", POR_DEFECTO_URL_IMAGE);
         ref.setValue(datosUsuario);
         ref.child("Publicaciones").setValue(crearMapPublicaciones()).addOnCompleteListener(this);
@@ -227,8 +228,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                 String username = dataS.getValue().toString();
                 userlist_creada.add(username);
             }
-            publicationList = new ArrayList<>();
-            url_publicationlist = new ArrayList<>();
+            publicationList = new ArrayList<Publication>();
+            url_publicationlist = new ArrayList<String>();
             publicationList.add(new Publication(id, user, texto, userlist_creada, imagen, comentlist_creada));
             url_publicationlist.add(id);
         }
