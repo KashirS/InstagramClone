@@ -58,11 +58,11 @@
         tools:layout="@layout/fragment_upload_image" >
         <action
             android:id="@+id/action_uploadImage_to_gallray"
-            app:destination="@id/gallray" />
+            app:destination="@id/GallrayFragment" />
     </fragment>
     <fragment
-        android:id="@+id/gallray"
-        android:name="cat.itb.instagramclone.fragments.gallray"
+        android:id="@+id/GallrayFragment"
+        android:name="cat.itb.instagramclone.fragments.GallrayFragment"
         android:label="fragment_gallray"
         tools:layout="@layout/fragment_gallray" />
 

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import cat.itb.instagramclone.R;
 
-public class gallray extends Fragment {
+public class GallrayFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
