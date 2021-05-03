@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageRegistrar;
 
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
     private void conectarFirebase(){
         database = FirebaseDatabase.getInstance(URL_DB);
+        storageReference = FirebaseStorage.getInstance("gs://instagram-clone-a09bc.appspot.com").getReference("/image");
         databaseReference = database.getReference(REF_USER_DB);
         publicacionDBReference = database.getReference(REF_PUBLIC_DB);
 
