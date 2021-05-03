@@ -45,14 +45,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
     private MaterialButton forgotPassword;
     private TextInputLayout userInput;
     private TextInputLayout passInput;
-    User logUser;
+    List<User> log_list = new ArrayList<>();
     String log_name;
     String log_password;
     boolean logeado = false;
     List<String> userlist_likes;
     List<String> comentlist_publi;
     List<Publication> publiList = new ArrayList<>();
-    Publication p_prueba;
+    static Publication prueba;
+    List<Publication> publications_amigos = new ArrayList<>();
+    List<String> id_publications_amigos = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
         switch (v.getId()){
             case R.id.login_button:
                 verifier();
+                //Toast.makeText(getContext(), MainActivity.user.getPublications_amigos().get(0).getId_publicacion(), Toast.LENGTH_LONG).show();
+                MainActivity.user = log_list.get(0);
+                //Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
                 break;
             case R.id.register_button_login:
                 Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_registerFragment);
@@ -97,7 +102,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
     private void verifier() {
         String usernameVerify;
         String passwordVerify;
-
         usernameVerify = username.getText().toString();
         passwordVerify = password.getText().toString();
 
@@ -113,11 +117,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
             passInput.setError("min 8 character");
             passInput.isEnabled();
         }else {
+
             log_name = usernameVerify;
             log_password = passwordVerify;
             guardarPreferencias(usernameVerify, passwordVerify);
             getUsuarioLogIn();
         }
+
     }
     private void cargarPreferencias(){
         SharedPreferences preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
@@ -136,19 +142,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
         editor.commit();
     }
 
-    private void crearPublicaciones(){
-        MainActivity.user.setPublications_amigos(new ArrayList<>());
+    private void crearPublicaciones(String id_user){
         List<String> list_string = new ArrayList<>();
-        String id_user = MainActivity.user.getId_usuario();
         MainActivity.databaseReference.child(id_user).child("Amigos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
+                    List<Publication> list = new ArrayList<>();
                     for (DataSnapshot ds : snapshot.getChildren()){
                         String user_amigo_id = ds.getValue().toString();
-                        List<Publication> publi_amigo = crearPublicacionesAmigos(user_amigo_id);
-                        //publicationList.addAll(publi_amigo);
-                        MainActivity.user.getPublications_amigos().addAll(publi_amigo);
+                        crearPublicacionesAmigos(user_amigo_id);
                     }
                 }
             }
@@ -160,15 +163,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
         });
     }
 
-    private List<Publication> crearPublicacionesAmigos(String id){
-        List<Publication> publicationList_amigo = new ArrayList<>();
+    private void crearPublicacionesAmigos(String id){
+
         MainActivity.databaseReference.child(id).child("Publicaciones").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()){
                     String id_publicacion_amigo = ds.getValue().toString();
-                    Publication p = crearPublicacion(id_publicacion_amigo);
-                    publicationList_amigo.add(p);
+                    crearPublicacion(id_publicacion_amigo);
                 }
             }
 
@@ -177,11 +179,39 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
                 Toast.makeText(getContext(), "ERROR CREANDO PUBLICACIONES AMIGOS ", Toast.LENGTH_LONG).show();
             }
         });
-        return publicationList_amigo;
+
     }
 
-    private Publication crearPublicacion(String id_publicacion){
-        p_prueba = new Publication();
+    private void crearUser(String id_user){
+        List<String> list_string = new ArrayList<>();
+        MainActivity.databaseReference.child(id_user).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    List<Publication> list = new ArrayList<>();
+                    String id_user = snapshot.child("id_usuario").getValue().toString();
+                    String username = snapshot.child("username").getValue().toString();
+                    String password = snapshot.child("password").getValue().toString();
+                    String name = snapshot.child("nombre_usuario").getValue().toString();
+                    String apellido = snapshot.child("apellido_usuario").getValue().toString();
+                    String email = snapshot.child("email_usuario").getValue().toString();
+                    String descripcion = snapshot.child("descripcion_usuario").getValue().toString();
+                    String image = snapshot.child("imagen_usuario").getValue().toString();
+                    for (DataSnapshot ds : snapshot.child("Publicaciones").getChildren()){
+//TODO: ACacbar
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "ERROR CREANDO PUBLICACIONES PARA VER USUARIO ", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void crearPublicacion(String id_publicacion){
+        prueba = new Publication();
         MainActivity.publicacionDBReference.child(id_publicacion).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -189,6 +219,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
                     List<String> likes = new ArrayList<>();
                     List<String> comentarios = new ArrayList<>();
                     String id_publi_amigo = snapshot.child("id_publicacion").getValue().toString();
+                    Toast.makeText(getContext(), "ID_PUBLI_USER2: "+id_publi_amigo, Toast.LENGTH_SHORT).show();
                     String imagen = snapshot.child("imagen_publicacion").getValue().toString();
                     String texto = snapshot.child("id_publicacion").getValue().toString();
                     String user_ammigo_id = snapshot.child("user_propietario").getValue().toString();
@@ -200,7 +231,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
                         String comentario = ds2.getValue().toString();
                         comentarios.add(comentario);
                     }
-                    p_prueba = new Publication(id_publi_amigo, user_ammigo_id, texto, likes, imagen, comentarios);
+                    Publication publi = new Publication(id_publi_amigo, user_ammigo_id, texto, likes, imagen, comentarios);
+                    publications_amigos.add(publi);
+                    id_publications_amigos.add(id_publi_amigo);
+                    Toast.makeText(getContext(), "ID_USER: "+publi.getUser_propietario(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -209,7 +243,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
                 Toast.makeText(getContext(), "ERROR CREANDO PUBLICACION AMIGO ", Toast.LENGTH_LONG).show();
             }
         });
-        return p_prueba;
     }
 
     public void findPublication(String id){
@@ -262,21 +295,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
                         String imagen = ds.child("imagen_usuario").getValue().toString();
                         for(DataSnapshot dataPublicaciones : ds.child("Publicaciones").getChildren()){
                             String id_publi = dataPublicaciones.getValue().toString();
+                            idPublicationList.add(id_publi);
+                            //Toast.makeText(getContext(), id_publi, Toast.LENGTH_SHORT).show();
                             findPublication(id_publi);
-                        }
-                        MainActivity.user = new User(id, username, password, name, apellido, imagen, email, idPublicationList, publiList, descripcion);
-                        crearPublicaciones();
-                        try {
-                            Toast.makeText(getContext(), "Cargando...", Toast.LENGTH_LONG).show();
-                            sleep(10000);
-                        }catch (Exception e){
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
 
-                        Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
+                        }
+                        crearPublicaciones(id);
+                        User u = new User(id, username, password, name, apellido, imagen, email, idPublicationList, publiList, descripcion, id_publications_amigos, publications_amigos);
+                        //addUser(u); TODO: Falla aqui
+                        //Toast.makeText(getContext(), MainActivity.user.getNombre_usuario(), Toast.LENGTH_LONG).show();
                     }
                 }
         }
+    }
+
+    private void addUser(User u){
+        log_list.add(u);
     }
 
     @Override

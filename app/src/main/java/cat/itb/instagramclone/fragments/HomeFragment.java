@@ -73,10 +73,10 @@ public class HomeFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.home_fragment, container, false);
+
         publicaciones_recyclerView.setAdapter(new PublicationAdapter(MainActivity.user.getPublications_amigos()));
         publicaciones_recyclerView = v.findViewById(R.id.home_publication_recyclerView);
         publicaciones_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //Toast.makeText(getContext(), "Main User: "+ MainActivity.user.getNombre_usuario(), Toast.LENGTH_LONG).show();
         materialToolbar = v.findViewById(R.id.top_app_bar);
         materialToolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
         story = v.findViewById(R.id.story_recy);
@@ -84,42 +84,6 @@ public class HomeFragment extends Fragment{
         //story.setAdapter(new StoryAdapter());
 
         return v;
-    }
-
-
-    public List<User> getPublicacionesUsers(){
-        MainActivity.databaseReference.child("Publicaciones").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    publicationList = new ArrayList<>();
-                    for (DataSnapshot ds : snapshot.getChildren()){
-                        List<String> comentList = new ArrayList<>();
-                        List<String> likeList = new ArrayList<>();
-                        String id_publi = ds.child("id_publicacion").getValue().toString();
-                        String imagen = ds.child("imagen_publicacion").getValue().toString();
-                        String texto = ds.child("texto_publicacion").getValue().toString();
-                        String user = ds.child("user_propietario").getValue().toString();
-                        for (DataSnapshot dataComent : snapshot.child("Comentarios").getChildren()){
-                            String com = dataComent.getValue().toString();
-                            comentList.add(com);
-                        }
-                        for (DataSnapshot dataLike : snapshot.child("Likes").getChildren()){
-                            String username_like = dataLike.getValue().toString();
-                            likeList.add(username_like);
-                        }
-                        publicationList.add(new Publication(id_publi, user, texto, likeList, imagen, comentList));
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "ERROR: "+error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-        return new ArrayList<User>();
     }
 
 

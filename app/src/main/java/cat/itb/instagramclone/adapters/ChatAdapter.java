@@ -51,14 +51,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             user_chat_button = itemView.findViewById(R.id.user_chat_button);
-            imageView = itemView.findViewById(R.id.chat_user_image);
-            chat_user = itemView.findViewById(R.id.chat_chat);
+            //imageView = itemView.findViewById(R.id.chat_user_image);
+            //chat_user = itemView.findViewById(R.id.chat_chat);
         }
 
         public void bindData(Chat chat,  Drawable drawable){
             user_chat_button.setText(chat.getUser_chat().getNombre_usuario());
-            imageView.setImageDrawable(drawable);
-            chat_user.setText(chat.getChat().get(0));
+            //imageView.setImageDrawable(drawable);
+            //chat_user.setText(chat.getChat().get(0));
         }
     }
 }

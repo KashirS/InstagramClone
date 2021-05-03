@@ -1,5 +1,6 @@
 package cat.itb.instagramclone.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -72,7 +73,7 @@ public class User {
 
     }
 
-    public User(String id_usuario, String username, String password, String nombre_usuario, String apellidos_usuario, String imagen_usuario, String email_usuaio, List<String> url_publications_user, List<Publication> publications_user, String descripcion_user, List<String> ids_amigos_list, List<User> users_amigos_list) {
+    public User(String id_usuario, String username, String password, String nombre_usuario, String apellidos_usuario, String imagen_usuario, String email_usuaio, List<String> url_publications_user, List<Publication> publications_user, String descripcion_user, List<String> ids_amigos_list, List<Publication> publications_amigos) {
         this.id_usuario = id_usuario;
         this.username = username;
         this.password = password;
@@ -84,7 +85,17 @@ public class User {
         this.publications_user = publications_user;
         this.descripcion_user = descripcion_user;
         this.ids_amigos_list = ids_amigos_list;
-        this.users_amigos_list = users_amigos_list;
+        this.publications_amigos = publications_amigos;
+    }
+
+    public List<Publication> getPublicacionesAmigos(){
+        List<Publication> lista = new ArrayList<>();
+        for (User u : getUsers_amigos_list()){
+            for (Publication p : u.getPublications_user()){
+                lista.add(p);
+            }
+        }
+        return lista;
     }
 
     public String getUsername() {
