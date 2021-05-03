@@ -128,6 +128,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         datosUsuario.put("descripcion_usuario", "");
         datosUsuario.put("imagen_usuario", POR_DEFECTO_URL_IMAGE);
         ref.setValue(datosUsuario);
+        ref.child("Amigos").setValue(crearMapAmigos());
         ref.child("Publicaciones").setValue(crearMapPublicaciones()).addOnCompleteListener(this);
         getPublicaciones();
         MainActivity.user = new User(ref.getKey(),username, password, name, surname, POR_DEFECTO_URL_IMAGE, email, url_publicationlist, publicationList, "");
@@ -136,6 +137,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     public void getPublicaciones(){
         MainActivity.publicacionDBReference.addValueEventListener(this);
+    }
+
+    private Map<String, String> crearMapAmigos(){
+        Map<String, String> datosAmigos = new HashMap<>();
+        datosAmigos.put("id","-MZn49rmuaABnBwCJ7xq");
+        return datosAmigos;
     }
 
 
@@ -192,7 +199,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             surnameLayout.setErrorEnabled(false);
             crearusuario(userVerify, passwordVerify, emailVerify, nameVerify, surnameVerify);
             if (creado){
-                Toast.makeText(getContext(),"Navegando...",Toast.LENGTH_LONG).show();
                 Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
             }
         }

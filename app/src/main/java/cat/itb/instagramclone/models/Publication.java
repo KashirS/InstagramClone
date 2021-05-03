@@ -25,6 +25,10 @@ public class Publication {
         this.comentarios = comentarios;
     }
 
+    public Publication(String imagen_publicacion) {
+        this.imagen_publicacion = imagen_publicacion;
+    }
+
     public List<String> getLikes_publicacion() {
         return likes_publicacion;
     }

@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import cat.itb.instagramclone.R;
@@ -51,12 +52,14 @@ public class HomeFragment extends Fragment{
     MenuItem chat_item;
     MaterialToolbar materialToolbar;
     List<Publication> publicationList;
+    Publication p_prueba;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
 
     // TODO: Adapters Firebase https://www.youtube.com/watch?v=0pF9r0CsT_4
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,9 +73,10 @@ public class HomeFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.home_fragment, container, false);
+        publicaciones_recyclerView.setAdapter(new PublicationAdapter(MainActivity.user.getPublications_amigos()));
         publicaciones_recyclerView = v.findViewById(R.id.home_publication_recyclerView);
         publicaciones_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        publicaciones_recyclerView.setAdapter(new PublicationAdapter(MainActivity.user.getPublications_user()));
+        //Toast.makeText(getContext(), "Main User: "+ MainActivity.user.getNombre_usuario(), Toast.LENGTH_LONG).show();
         materialToolbar = v.findViewById(R.id.top_app_bar);
         materialToolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
         story = v.findViewById(R.id.story_recy);
@@ -81,6 +85,7 @@ public class HomeFragment extends Fragment{
 
         return v;
     }
+
 
     public List<User> getPublicacionesUsers(){
         MainActivity.databaseReference.child("Publicaciones").addValueEventListener(new ValueEventListener() {
@@ -92,7 +97,7 @@ public class HomeFragment extends Fragment{
                         List<String> comentList = new ArrayList<>();
                         List<String> likeList = new ArrayList<>();
                         String id_publi = ds.child("id_publicacion").getValue().toString();
-                        String imagen = ds.child("imagen_usuario").getValue().toString();
+                        String imagen = ds.child("imagen_publicacion").getValue().toString();
                         String texto = ds.child("texto_publicacion").getValue().toString();
                         String user = ds.child("user_propietario").getValue().toString();
                         for (DataSnapshot dataComent : snapshot.child("Comentarios").getChildren()){
@@ -111,7 +116,7 @@ public class HomeFragment extends Fragment{
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(getContext(), "ERROR: "+error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
         return new ArrayList<User>();

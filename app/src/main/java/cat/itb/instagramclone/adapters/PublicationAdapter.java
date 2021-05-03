@@ -64,7 +64,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         MaterialButton nombre_usuario_2;
         MaterialTextView texto_usuario;
         String imagen_user;
-        String nombre_user:
+        String nombre_user;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.nombre_usuario = itemView.findViewById(R.id.nombre_usuario_button);
@@ -78,10 +78,10 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         public void bindData(Publication p, Context context){
             MainActivity.databaseReference.child(p.getUser_propietario()).addValueEventListener(this);
             Glide.with(context).load(imagen_user).fitCenter().centerCrop().into(image_usuario_button);
-            nombre_usuario.setText(p.getUser_propietario());
+            nombre_usuario.setText(nombre_user);
             Glide.with(context).load(p.getImagen_publicacion()).fitCenter().centerCrop().into(imagen_publicacion);
             num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().size() + " usuarios más.");
-            nombre_usuario_2.setText(p.getUser_propietario().getNombre_usuario());
+            nombre_usuario_2.setText(nombre_user);
             texto_usuario.setText(p.getTexto_publicacion());
         }
 
@@ -89,7 +89,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         public void onDataChange(@NonNull DataSnapshot snapshot) {
             if (snapshot.exists()){
                 imagen_user = snapshot.child("imagen_usuario").getValue().toString();
-                nombre_user = snapshot
+                nombre_user = snapshot.child("username").getValue().toString();
             }
         }
 
