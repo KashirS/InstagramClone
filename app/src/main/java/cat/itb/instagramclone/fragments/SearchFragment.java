@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import cat.itb.instagramclone.R;
+import cat.itb.instagramclone.activities.MainActivity;
 import cat.itb.instagramclone.adapters.SearchAdapter;
 import cat.itb.instagramclone.viewmodel.SearchViewModel;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -42,7 +43,7 @@ public class SearchFragment extends Fragment {
         View v = inflater.inflate(R.layout.search_fragment, container, false);
         search_recyclerView = v.findViewById(R.id.search_recyclerView);
         search_recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
-        search_recyclerView.setAdapter(new SearchAdapter(SearchViewModel.searchesList));
+        //search_recyclerView.setAdapter(new SearchAdapter(MainActivity.publicacionesList));
 
         return v;
     }

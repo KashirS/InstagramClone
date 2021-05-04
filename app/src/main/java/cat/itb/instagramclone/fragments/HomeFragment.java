@@ -75,7 +75,6 @@ public class HomeFragment extends Fragment{
         mViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         MainActivity.mostrarNavDrawer();
         setHasOptionsMenu(true);
-
     }
 
     @Override
@@ -88,7 +87,10 @@ public class HomeFragment extends Fragment{
         story.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         //story.setAdapter(new StoryAdapter());
         publicaciones_recyclerView = v.findViewById(R.id.home_publication_recyclerView);
-        crearRepositorio();
+        publicaciones_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        List<String> list = MainActivity.user.getPublicacionesAmigos();
+//        Toast.makeText(getContext(), MainActivity.user.getUsers_amigos_list().size(), Toast.LENGTH_LONG).show();
+        publicaciones_recyclerView.setAdapter(new PublicationAdapter(MainActivity.user.getUrl_publications_user()));
         return v;
     }
 
@@ -110,91 +112,7 @@ public class HomeFragment extends Fragment{
         }
 
     }
+//------------------------------------------------------------------------------------------------------
 
-    private void crearRepositorio(){
-        for (String id : MainActivity.userList.get(0).getIds_amigos_list()){
-            MainActivity.databaseReference.child(id).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()){
-                        for (DataSnapshot ds : snapshot.child("Publicaciones").getChildren()){
-                            String pub_id = ds.getValue().toString();
-                            crearPublicacion(pub_id);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-        MainActivity.userList.get(0).setPublications_amigos(publicationList);
-        for (String p_id : MainActivity.userList.get(0).getUrl_publications_user()){
-            MainActivity.publicacionDBReference.child(p_id).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()){
-                        String publicacion_id = snapshot.child("id_publicacion").getValue().toString();
-                        String imagen = snapshot.child("imagen_publicacion").getValue().toString();
-                        String texto = snapshot.child("texto_publicacion").getValue().toString();
-                        String user = snapshot.child("user_propietario").getValue().toString();
-                        List<String> comentlist_publi = new ArrayList<>();
-                        List<String> userlist_likes = new ArrayList<>();
-                        for (DataSnapshot ds : snapshot.child("Comentarios").getChildren()){
-                            String com = ds.getValue().toString();
-                            comentlist_publi.add(com);
-                        }
-                        for (DataSnapshot dataS : snapshot.child("Likes").getChildren()){
-                            String username = dataS.getValue().toString();
-                            userlist_likes.add(username);
-                        }
-                        Publication p = new Publication(publicacion_id, user, texto, userlist_likes, imagen, comentlist_publi);
-                        userPublications.add(p);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            MainActivity.userList.get(0).setPublications_user(userPublications);
-        }
-        publicaciones_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        publicaciones_recyclerView.setAdapter(new PublicationAdapter(publicationList));
-    }
-
-    private void crearPublicacion(String id){
-        MainActivity.publicacionDBReference.child(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    String publicacion_id = snapshot.child("id_publicacion").getValue().toString();
-                    String imagen = snapshot.child("imagen_publicacion").getValue().toString();
-                    String texto = snapshot.child("texto_publicacion").getValue().toString();
-                    String user = snapshot.child("user_propietario").getValue().toString();
-                    List<String> comentlist_publi = new ArrayList<>();
-                    List<String> userlist_likes = new ArrayList<>();
-                    for (DataSnapshot ds : snapshot.child("Comentarios").getChildren()){
-                        String com = ds.getValue().toString();
-                        comentlist_publi.add(com);
-                    }
-                    for (DataSnapshot dataS : snapshot.child("Likes").getChildren()){
-                        String username = dataS.getValue().toString();
-                        userlist_likes.add(username);
-                    }
-                    Publication p = new Publication(publicacion_id, user, texto, userlist_likes, imagen, comentlist_publi);
-                    publicationList.add(p);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
 }

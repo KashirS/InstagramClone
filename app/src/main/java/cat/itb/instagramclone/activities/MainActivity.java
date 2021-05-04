@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public static StorageReference storageReference;
     public static List<User> userList;
     public static List<Publication> publicacionesList;
+    public static List<User> user_log_list;
+    public static List<User> users_DB_List;
     FirebaseAuth auth;
     NavController navController;
 
@@ -68,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         cargarDatos();
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
-
         view = findViewById(R.id.bottom_navigation);
         view.setOnNavigationItemSelectedListener(this);
 
@@ -124,13 +125,13 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public void cargarDatos(){
         publicacionesList = new ArrayList<>();
         userList = new ArrayList<>();
+        user_log_list = new ArrayList<>();
+        users_DB_List = new ArrayList<>();
+
         DBReference.addValueEventListener(this);
+
     }
 
-    private void cargarUsuario(){
-        //TODO: Registo usuarios https://www.youtube.com/watch?v=xwhEHb_AZ6k&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&start_radio=1&t=1103
-        //TODO: Login usuarios https://www.youtube.com/watch?v=IEc44_CxoyY&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&index=2
-    }
 
     @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -178,11 +179,33 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                         }
                         User u = new User(id_user, username, password, name, apellido, image, email, publi_ids_list, descripcion, amigos_ids_list);
                         userList.add(u);
+
+                    }
+
+                    for (User u : userList){
+                        List<Publication> p_l = new ArrayList<>();
+                        List<User> u_1 = new ArrayList<>();
+                        for (Publication p : publicacionesList){
+                            if (u.getId_usuario().equals(p.getUser_propietario())){
+                                p_l.add(p);
+                            }
+                        }
+                        for (String s : u.getUrl_publications_user()){
+                            for (User user : userList){
+                                if (user.getId_usuario().equals(s)){
+                                    u_1.add(user);
+                                }
+                            }
+                        }
+                        u.setUsers_amigos_list(u_1);
+                        u.setPublications_user(p_l);
+                        users_DB_List.add(u);
+                        //Toast.makeText(getBaseContext(), "ID: "+u.getUsername(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getBaseContext(), "SIZE: "+u.getPublications_user().size(), Toast.LENGTH_LONG).show();
                     }
                 }
             }
         }
-        Toast.makeText(getBaseContext(), publicacionesList.size()+"", Toast.LENGTH_SHORT).show();
     }
 
     @Override

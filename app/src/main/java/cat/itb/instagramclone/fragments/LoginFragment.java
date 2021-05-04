@@ -36,7 +36,7 @@ import cat.itb.instagramclone.models.User;
 import static java.lang.Thread.sleep;
 
 
-public class LoginFragment extends Fragment implements View.OnClickListener, ValueEventListener{
+public class LoginFragment extends Fragment implements View.OnClickListener{
 
     private TextInputEditText username;
     private TextInputEditText password;
@@ -85,17 +85,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
         switch (v.getId()){
             case R.id.login_button:
                 verifier();
-                //Toast.makeText(getContext(), "Nombre: "+MainActivity.userList.get(0).getNombre_usuario(), Toast.LENGTH_LONG).show();
                 Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
                 break;
             case R.id.register_button_login:
                 Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_registerFragment);
                 break;
         }
-    }
-
-    public void getUsuarioLogIn(){
-        MainActivity.databaseReference.addValueEventListener(this);
     }
 
     private void verifier() {
@@ -120,11 +115,20 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
             log_name = usernameVerify;
             log_password = passwordVerify;
             guardarPreferencias(usernameVerify, passwordVerify);
-            getUsuarioLogIn();
-            //MainActivity.user = log_list.get(0);
+            logear(log_name, log_password);
+
         }
 
     }
+
+    private void logear(String name, String password){
+        for (User userDB : MainActivity.users_DB_List){
+            if (userDB.getUsername().equals("@"+name) && userDB.getPassword().equals(password)){
+                MainActivity.user = userDB;
+            }
+        }
+    }
+
     private void cargarPreferencias(){
         SharedPreferences preferencias = getActivity().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         String usuario = preferencias.getString("user", "");
@@ -142,186 +146,4 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
         editor.commit();
     }
 
-    private void crearPublicaciones(String id_user){
-        List<String> list_string = new ArrayList<>();
-        MainActivity.databaseReference.child(id_user).child("Amigos").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    List<Publication> list = new ArrayList<>();
-                    for (DataSnapshot ds : snapshot.getChildren()){
-                        String user_amigo_id = ds.getValue().toString();
-                        crearPublicacionesAmigos(user_amigo_id);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "ERROR CREANDO PUBLICACIONES PARA VER USUARIO ", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void crearPublicacionesAmigos(String id){
-
-        MainActivity.databaseReference.child(id).child("Publicaciones").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    String id_publicacion_amigo = ds.getValue().toString();
-                    crearPublicacion(id_publicacion_amigo);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "ERROR CREANDO PUBLICACIONES AMIGOS ", Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
-
-    private void crearPublicacion(String id_publicacion){
-        prueba = new Publication();
-        MainActivity.publicacionDBReference.child(id_publicacion).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    List<String> likes = new ArrayList<>();
-                    List<String> comentarios = new ArrayList<>();
-                    String id_publi_amigo = snapshot.child("id_publicacion").getValue().toString();
-                    String imagen = snapshot.child("imagen_publicacion").getValue().toString();
-                    String texto = snapshot.child("texto_publicacion").getValue().toString();
-                    String user_ammigo_id = snapshot.child("user_propietario").getValue().toString();
-                    for (DataSnapshot ds : snapshot.child("Likes").getChildren()){
-                        String like = ds.getValue().toString();
-                        likes.add(like);
-                    }
-                    for (DataSnapshot ds2 : snapshot.child("Comentarios").getChildren()){
-                        String comentario = ds2.getValue().toString();
-                        comentarios.add(comentario);
-                    }
-                    Publication publi = new Publication(id_publi_amigo, user_ammigo_id, texto, likes, imagen, comentarios);
-                    publications_amigos.add(publi);
-                    id_publications_amigos.add(id_publi_amigo);
-                    Toast.makeText(getContext(), "ID_USER: "+publi.getUser_propietario(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "ERROR CREANDO PUBLICACION AMIGO ", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public void findPublication(String id){
-        MainActivity.publicacionDBReference.child(id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    String publicacion_id = snapshot.child("id_publicacion").getValue().toString();
-                    String imagen = snapshot.child("imagen_publicacion").getValue().toString();
-                    String texto = snapshot.child("texto_publicacion").getValue().toString();
-                    String user = snapshot.child("user_propietario").getValue().toString();
-                    comentlist_publi = new ArrayList<>();
-                    userlist_likes = new ArrayList<>();
-                    for (DataSnapshot ds : snapshot.child("Comentarios").getChildren()){
-                        String com = ds.getValue().toString();
-                        comentlist_publi.add(com);
-                    }
-                    for (DataSnapshot dataS : snapshot.child("Likes").getChildren()){
-                        String username = dataS.getValue().toString();
-                        userlist_likes.add(username);
-                    }
-                    Publication p = new Publication(publicacion_id, user, texto, userlist_likes, imagen, comentlist_publi);
-                    publiList.add(p);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "ERROR: "+error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    @Override
-    public void onDataChange(@NonNull DataSnapshot snapshot) {
-        if (snapshot.exists()){
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    String username = ds.child("username").getValue().toString();
-                    String password = ds.child("password").getValue().toString();
-                    if (username.equals("@"+log_name) && password.equals(log_password)){
-                        logeado = true;
-                        List<Publication> publicationList = new ArrayList<>();
-                        List<String> idPublicationList = new ArrayList<>();
-                        String id = ds.child("id_usuario").getValue().toString();
-                        String email = ds.child("email_usuario").getValue().toString();
-                        String name = ds.child("nombre_usuario").getValue().toString();
-                        String apellido = ds.child("apellidos_usuario").getValue().toString();
-                        String descripcion = ds.child("descripcion_usuario").getValue().toString();
-                        String imagen = ds.child("imagen_usuario").getValue().toString();
-                        for(DataSnapshot dataPublicaciones : ds.child("Publicaciones").getChildren()){
-                            String id_publi = dataPublicaciones.getValue().toString();
-                            idPublicationList.add(id_publi);
-                            //Toast.makeText(getContext(), id_publi, Toast.LENGTH_SHORT).show();
-                            findPublication(id_publi);
-                        }
-                        for(DataSnapshot dataAmigos : ds.child("Amigos").getChildren()){
-                            String id_amigo = dataAmigos.getValue().toString();
-                            findAmigo(id_amigo);
-
-                        }
-                        //crearPublicaciones(id);
-                        User u = new User(id, username, password, name, apellido, imagen, email, idPublicationList, publiList, descripcion, id_publications_amigos, publications_amigos);
-                        MainActivity.userList.add(u);
-                        //Toast.makeText(getContext(), MainActivity.user.getNombre_usuario(), Toast.LENGTH_LONG).show();
-                    }
-                }
-        }
-    }
-
-    private void findAmigo(String id_amigo){
-        List<String> amigos_list = new ArrayList<>();
-        List<String> publi_list = new ArrayList<>();
-        User u = new User();
-        ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String id = snapshot.child("id_usuario").getValue().toString();
-                String email = snapshot.child("email_usuario").getValue().toString();
-                String name = snapshot.child("nombre_usuario").getValue().toString();
-                String apellido = snapshot.child("apellidos_usuario").getValue().toString();
-                String descripcion = snapshot.child("descripcion_usuario").getValue().toString();
-                String imagen = snapshot.child("imagen_usuario").getValue().toString();
-                for(DataSnapshot dataPublicaciones : snapshot.child("Publicaciones").getChildren()){
-                    String id_publi = dataPublicaciones.getValue().toString();
-                    publi_list.add(id_publi);
-                }
-                for(DataSnapshot dataPublicaciones : snapshot.child("Amigos").getChildren()){
-                    String id_amigo = dataPublicaciones.getValue().toString();
-                    amigos_list.add(id_amigo);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        MainActivity.databaseReference.child(id_amigo).addValueEventListener(listener);
-    }
-
-    private void addUser(User u){
-        log_list.add(u);
-    }
-
-    @Override
-    public void onCancelled(@NonNull DatabaseError error) {
-        Toast.makeText(getContext(), "ERROR: "+error.getMessage(), Toast.LENGTH_LONG).show();
-    }
 }

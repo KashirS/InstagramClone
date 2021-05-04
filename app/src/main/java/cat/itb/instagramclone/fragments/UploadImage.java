@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -33,7 +34,7 @@ import cat.itb.instagramclone.models.Publication;
 
 import static android.app.Activity.RESULT_OK;
 
-public class UploadImage extends Fragment {
+public class UploadImage extends Fragment implements View.OnClickListener {
 
     ImageButton uploadButton;
     ImageView picToUpload;
@@ -55,23 +56,9 @@ public class UploadImage extends Fragment {
         MainActivity.databaseReference = MainActivity.database.getReference("image");
         MainActivity.storageReference = FirebaseStorage.getInstance().getReference();
 
-        picToUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(getView()).navigate(R.id.action_uploadImage_to_gallray);
-            }
-        });
+        picToUpload.setOnClickListener(this::onClick);
 
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (imageUri != null){
-                    uploadToFirebase(imageUri);
-                }else {
-                    Toast.makeText(getContext(),"Please select image",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        uploadButton.setOnClickListener(this::onClick);
 
         return v;
     }
@@ -118,5 +105,25 @@ public class UploadImage extends Fragment {
             picToUpload.setImageURI(imageUri);
         }
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.uploadimage:
+                if (imageUri != null){
+                    uploadToFirebase(imageUri);
+                }else {
+                    Toast.makeText(getContext(),"Please select image",Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.pic_to_upload:
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/");
+                startActivityForResult(galleryIntent, 2);
+                break;
+
+        }
     }
 }

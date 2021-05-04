@@ -82,10 +82,10 @@ public class User {
         this.ids_amigos_list = ids_amigos_list;
     }
 
-    public List<Publication> getPublicacionesAmigos(){
-        List<Publication> lista = new ArrayList<>();
+    public List<String> getPublicacionesAmigos(){
+        List<String> lista = new ArrayList<>();
         for (User u : getUsers_amigos_list()){
-            for (Publication p : u.getPublications_user()){
+            for (String p : u.getIds_amigos_list()){
                 lista.add(p);
             }
         }

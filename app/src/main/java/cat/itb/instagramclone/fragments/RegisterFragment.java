@@ -131,7 +131,15 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         ref.child("Amigos").setValue(crearMapAmigos());
         ref.child("Publicaciones").setValue(crearMapPublicaciones()).addOnCompleteListener(this);
         getPublicaciones();
-        MainActivity.userList.add(new User(ref.getKey(),username, password, name, surname, POR_DEFECTO_URL_IMAGE, email, url_publicationlist, publicationList, ""));
+        actualizar();
+        MainActivity.user_log_list.add(new User(ref.getKey(),username, password, name, surname, POR_DEFECTO_URL_IMAGE, email, url_publicationlist, publicationList, ""));
+
+    }
+
+    public void actualizar(){
+        for (int i = 0; i<=MainActivity.userList.size()-1; i++){
+            MainActivity.userList.remove(i);
+        }
 
     }
 

@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cat.itb.instagramclone.R;
@@ -31,9 +32,10 @@ import cat.itb.instagramclone.models.Publication;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.ViewHolder>{
-    List<Publication> publicationList;
+    List<String> publicationList;
 
-    public PublicationAdapter(List<Publication> publicationList) {
+
+    public PublicationAdapter(List<String> publicationList) {
         this.publicationList = publicationList;
     }
 
@@ -46,7 +48,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Publication p = this.publicationList.get(position);
+        String p = this.publicationList.get(position);
         holder.bindData(p, holder.itemView.getContext());
     }
 
@@ -65,6 +67,11 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         MaterialTextView texto_usuario;
         String imagen_user;
         String nombre_user;
+        String imagen_publi;
+        String texto_publi;
+        String id_propiet;
+        List<String> likes;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.nombre_usuario = itemView.findViewById(R.id.nombre_usuario_button);
@@ -73,23 +80,38 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
             this.nombre_usuario_2 = itemView.findViewById(R.id.nombre_usuario_button_2);
             this.texto_usuario = itemView.findViewById(R.id.texto_usuario_textView);
             this.image_usuario_button = itemView.findViewById(R.id.imagen_usuario_button);
+            this.likes = new ArrayList<>();
         }
 
-        public void bindData(Publication p, Context context){
-            MainActivity.databaseReference.child(p.getUser_propietario()).addValueEventListener(this);
-            Glide.with(context).load(imagen_user).fitCenter().centerCrop().into(image_usuario_button);
+        public void bindData(String p, Context context){
+            MainActivity.publicacionDBReference.child(p).addValueEventListener(this);
+            MainActivity.databaseReference.child(p).addValueEventListener(this);
             nombre_usuario.setText(nombre_user);
-            Glide.with(context).load(p.getImagen_publicacion()).fitCenter().centerCrop().into(imagen_publicacion);
-            num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().size() + " usuarios más.");
+            num_likes_publicacion.setText("Le ha gustado a " + likes.size() + " usuarios más.");
             nombre_usuario_2.setText(nombre_user);
-            texto_usuario.setText(p.getTexto_publicacion());
+            texto_usuario.setText(texto_publi);
+            Glide.with(context).load(imagen_user).fitCenter().centerCrop().into(image_usuario_button);
+            Glide.with(context).load(imagen_publi).fitCenter().centerCrop().into(imagen_publicacion);
         }
 
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
             if (snapshot.exists()){
-                imagen_user = snapshot.child("imagen_usuario").getValue().toString();
-                nombre_user = snapshot.child("username").getValue().toString();
+                if (snapshot.getRef().getParent().getKey().equals("Publicaciones")){
+                    texto_publi = snapshot.child("texto_publicacion").getValue().toString();
+                    imagen_publi = snapshot.child("imagen_publicacion").getValue().toString();
+                    id_propiet = snapshot.child("user_propietario").getValue().toString();
+                    for (DataSnapshot s : snapshot.child("Likes").getChildren()){
+                        String like = s.getValue().toString();
+                        likes.add(like);
+                    }
+
+                }else{
+                    imagen_user = snapshot.child("imagen_usuario").getValue().toString();
+                    nombre_user = snapshot.child("username").getValue().toString();
+
+                }
+
             }
         }
 

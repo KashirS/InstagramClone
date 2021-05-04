@@ -13,17 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 import cat.itb.instagramclone.R;
+import cat.itb.instagramclone.activities.MainActivity;
 import cat.itb.instagramclone.models.Publication;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
-    List<Publication> publicationList;
+    List<String> publicationList;
 
-    public SearchAdapter(List<Publication> publicationList) {
+    public SearchAdapter(List<String> publicationList) {
         this.publicationList = publicationList;
     }
 
@@ -44,20 +48,35 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return this.publicationList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements ValueEventListener {
         ImageView imagen_publicacion;
+        Context c;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imagen_publicacion = itemView.findViewById(R.id.image_pub);
         }
 
-        public void bindData(Publication p, Context context){
+        public void bindData(String p, Context context){
             //TODO: Poner imagenes
-            Glide.with(context)
-                    .load(p.getImagen_publicacion())
-                    .fitCenter()
-                    .centerCrop()
-                    .into(imagen_publicacion);
+            c = context;
+            MainActivity.publicacionDBReference.child(p).addValueEventListener(this);
+
+        }
+
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            if (snapshot.exists()){
+                String i = snapshot.child("imagen_publicacion").getValue().toString();
+                Glide.with(c)
+                        .load(i)
+                        .fitCenter()
+                        .centerCrop()
+                        .into(imagen_publicacion);
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
 
         }
     }
