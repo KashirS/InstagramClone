@@ -19,18 +19,18 @@ public class HomeViewModel extends ViewModel {
     public static List<Publication> publicacionesList = new ArrayList<Publication>();
     public static List<Story> storyList = new ArrayList<Story>();
 
-    String[] comentarios = {
+    /*String[] comentarios = {
             "Gran foto",
             "Me encanta",
             "Que bien te ves",
             "Nice"
-    };
+    };*/
 
-    User[] users = {
+    /*User[] users = {
             new User( "","@jorge", "", null, ""),
             new User("","@kashir", "", null, ""),
             new User( "","@manolo_33", "", null, "")
-    };
+    };*/
 /*
     Publication[] publicaciones = {
             new Publication("", new User("", "@jorge", "", null, ""), "Gran dia", Arrays.asList(users), "R.drawable.gohan", Arrays.asList(comentarios)),
@@ -44,7 +44,7 @@ public class HomeViewModel extends ViewModel {
 
  */
 
-    Integer [] histori= {
+    /*Integer [] histori= {
             R.drawable.gogeta,
             R.drawable.gogeta,
             R.drawable.gogeta
@@ -58,7 +58,7 @@ public class HomeViewModel extends ViewModel {
             new Story(5, new User("", "@jorge", "",null, ""), Arrays.asList(histori)),
             new Story(6, new User("", "@kashir", "", null, ""), Arrays.asList(histori)),
             new Story(7, new User("", "@manolooo22", "", null, ""), Arrays.asList(histori))
-    };
+    };*/
 /*
     public HomeViewModel() {
         Collections.addAll(publicacionesList, publicaciones);

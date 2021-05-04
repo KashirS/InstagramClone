@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cat.itb.instagramclone.R;
+import cat.itb.instagramclone.activities.MainActivity;
 import cat.itb.instagramclone.adapters.ChatAdapter;
 import cat.itb.instagramclone.viewmodel.ChatViewModel;
 
@@ -31,6 +32,7 @@ public class ChatFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
+        MainActivity.quitarNavDrawer();
     }
 
     @Override

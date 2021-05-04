@@ -14,11 +14,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.textview.MaterialTextView;
 
 import cat.itb.instagramclone.R;
+import cat.itb.instagramclone.activities.MainActivity;
 import cat.itb.instagramclone.adapters.SearchAdapter;
+import cat.itb.instagramclone.models.User;
 import cat.itb.instagramclone.viewmodel.ProfileViewModel;
 
 public class ProfileFragment extends Fragment {
@@ -28,6 +32,10 @@ public class ProfileFragment extends Fragment {
     ImageView profile_image;
     MaterialTextView profile_name;
     MaterialTextView profile_description;
+    TextView num_pub;
+    TextView num_user_follower;
+    TextView num_user_follow;
+
 
     public static ProfileFragment newInstance() {
         return new ProfileFragment();
@@ -43,15 +51,21 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.profile_fragment, container, false);
+        num_pub = v.findViewById(R.id.num_pub);
+        num_user_follower = v.findViewById(R.id.num_user_follower);
+        num_user_follow = v.findViewById(R.id.num_user_follow);
         profile_image = v.findViewById(R.id.imagen_user_profile);
-       // profile_image.setImageDrawable(getResources().getDrawable(mViewModel.user.getImagen_usuario()));
         profile_description = v.findViewById(R.id.profile_description);
-        profile_description.setText(mViewModel.user.getDescripcion_user());
+        profile_description.setText(MainActivity.userList.get(0).getDescripcion_user());
         profile_name = v.findViewById(R.id.nombre_user_profile);
-        profile_name.setText(mViewModel.user.getNombre_usuario());
+        profile_name.setText(MainActivity.userList.get(0).getUsername());
+        Glide.with(getContext()).load(MainActivity.userList.get(0).getImagen_usuario()).fitCenter().centerCrop().into(profile_image);
+        num_pub.setText(MainActivity.userList.get(0).getPublications_user().size()+"");
+        num_user_follower.setText(MainActivity.userList.get(0).getIds_amigos_list().size()+"");
+        num_user_follow.setText(MainActivity.userList.get(0).getIds_amigos_list().size()+"");
         profile_recyclerView = v.findViewById(R.id.profile_recyclerView);
         profile_recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
-        //profile_recyclerView.setAdapter(new SearchAdapter(mViewModel.user.getPublications_user()));
+        profile_recyclerView.setAdapter(new SearchAdapter(MainActivity.userList.get(0).getPublications_user()));
         return v;
     }
 

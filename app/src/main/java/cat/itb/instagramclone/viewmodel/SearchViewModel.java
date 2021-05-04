@@ -15,7 +15,7 @@ public class SearchViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     public static List<Publication> searchesList = new ArrayList<Publication>();
 
-    String[] comentarios = {
+    /*String[] comentarios = {
             "Gran foto",
             "Me encanta",
             "Que bien te ves",
@@ -26,7 +26,7 @@ public class SearchViewModel extends ViewModel {
             new User("", "@jorge", "", null, ""),
             new User("", "@kashir", "", null, ""),
             new User("", "@manolo_33", "", null, "")
-    };
+    };*/
 /*
     Publication[] searches = {
             new Publication(1, new User("", "@jorge", R.drawable.gogeta, null, ""), "Gran dia", Arrays.asList(users), R.drawable.gogeta, Arrays.asList(comentarios)),

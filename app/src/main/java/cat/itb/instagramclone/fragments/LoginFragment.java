@@ -45,7 +45,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
     private MaterialButton forgotPassword;
     private TextInputLayout userInput;
     private TextInputLayout passInput;
-    List<User> log_list = new ArrayList<>();
+    static List<User> log_list = new ArrayList<>();
     String log_name;
     String log_password;
     boolean logeado = false;
@@ -85,9 +85,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
         switch (v.getId()){
             case R.id.login_button:
                 verifier();
-                //Toast.makeText(getContext(), MainActivity.user.getPublications_amigos().get(0).getId_publicacion(), Toast.LENGTH_LONG).show();
-                MainActivity.user = log_list.get(0);
-                //Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
+                //Toast.makeText(getContext(), "Nombre: "+MainActivity.userList.get(0).getNombre_usuario(), Toast.LENGTH_LONG).show();
+                Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
                 break;
             case R.id.register_button_login:
                 Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_registerFragment);
@@ -122,6 +121,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
             log_password = passwordVerify;
             guardarPreferencias(usernameVerify, passwordVerify);
             getUsuarioLogIn();
+            //MainActivity.user = log_list.get(0);
         }
 
     }
@@ -182,33 +182,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
 
     }
 
-    private void crearUser(String id_user){
-        List<String> list_string = new ArrayList<>();
-        MainActivity.databaseReference.child(id_user).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    List<Publication> list = new ArrayList<>();
-                    String id_user = snapshot.child("id_usuario").getValue().toString();
-                    String username = snapshot.child("username").getValue().toString();
-                    String password = snapshot.child("password").getValue().toString();
-                    String name = snapshot.child("nombre_usuario").getValue().toString();
-                    String apellido = snapshot.child("apellido_usuario").getValue().toString();
-                    String email = snapshot.child("email_usuario").getValue().toString();
-                    String descripcion = snapshot.child("descripcion_usuario").getValue().toString();
-                    String image = snapshot.child("imagen_usuario").getValue().toString();
-                    for (DataSnapshot ds : snapshot.child("Publicaciones").getChildren()){
-//TODO: ACacbar
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "ERROR CREANDO PUBLICACIONES PARA VER USUARIO ", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 
     private void crearPublicacion(String id_publicacion){
         prueba = new Publication();
@@ -219,9 +192,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
                     List<String> likes = new ArrayList<>();
                     List<String> comentarios = new ArrayList<>();
                     String id_publi_amigo = snapshot.child("id_publicacion").getValue().toString();
-                    Toast.makeText(getContext(), "ID_PUBLI_USER2: "+id_publi_amigo, Toast.LENGTH_SHORT).show();
                     String imagen = snapshot.child("imagen_publicacion").getValue().toString();
-                    String texto = snapshot.child("id_publicacion").getValue().toString();
+                    String texto = snapshot.child("texto_publicacion").getValue().toString();
                     String user_ammigo_id = snapshot.child("user_propietario").getValue().toString();
                     for (DataSnapshot ds : snapshot.child("Likes").getChildren()){
                         String like = ds.getValue().toString();
@@ -298,15 +270,50 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Val
                             idPublicationList.add(id_publi);
                             //Toast.makeText(getContext(), id_publi, Toast.LENGTH_SHORT).show();
                             findPublication(id_publi);
+                        }
+                        for(DataSnapshot dataAmigos : ds.child("Amigos").getChildren()){
+                            String id_amigo = dataAmigos.getValue().toString();
+                            findAmigo(id_amigo);
 
                         }
-                        crearPublicaciones(id);
+                        //crearPublicaciones(id);
                         User u = new User(id, username, password, name, apellido, imagen, email, idPublicationList, publiList, descripcion, id_publications_amigos, publications_amigos);
-                        //addUser(u); TODO: Falla aqui
+                        MainActivity.userList.add(u);
                         //Toast.makeText(getContext(), MainActivity.user.getNombre_usuario(), Toast.LENGTH_LONG).show();
                     }
                 }
         }
+    }
+
+    private void findAmigo(String id_amigo){
+        List<String> amigos_list = new ArrayList<>();
+        List<String> publi_list = new ArrayList<>();
+        User u = new User();
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String id = snapshot.child("id_usuario").getValue().toString();
+                String email = snapshot.child("email_usuario").getValue().toString();
+                String name = snapshot.child("nombre_usuario").getValue().toString();
+                String apellido = snapshot.child("apellidos_usuario").getValue().toString();
+                String descripcion = snapshot.child("descripcion_usuario").getValue().toString();
+                String imagen = snapshot.child("imagen_usuario").getValue().toString();
+                for(DataSnapshot dataPublicaciones : snapshot.child("Publicaciones").getChildren()){
+                    String id_publi = dataPublicaciones.getValue().toString();
+                    publi_list.add(id_publi);
+                }
+                for(DataSnapshot dataPublicaciones : snapshot.child("Amigos").getChildren()){
+                    String id_amigo = dataPublicaciones.getValue().toString();
+                    amigos_list.add(id_amigo);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        MainActivity.databaseReference.child(id_amigo).addValueEventListener(listener);
     }
 
     private void addUser(User u){

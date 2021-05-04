@@ -13,16 +13,23 @@ import android.content.ContentResolver;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageRegistrar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cat.itb.instagramclone.R;
 import cat.itb.instagramclone.fragments.ActivityFragment;
@@ -30,9 +37,10 @@ import cat.itb.instagramclone.fragments.HomeFragment;
 import cat.itb.instagramclone.fragments.ProfileFragment;
 import cat.itb.instagramclone.fragments.SearchFragment;
 import cat.itb.instagramclone.fragments.UploadImage;
+import cat.itb.instagramclone.models.Publication;
 import cat.itb.instagramclone.models.User;
 
-public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener, ValueEventListener {
 
     final String URL_DB = "https://instagram-clone-a09bc-default-rtdb.firebaseio.com/";
     final String REF_USER_DB = "User";
@@ -42,8 +50,12 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     public static DatabaseReference publicacionDBReference;
     public static FirebaseDatabase database;
     public static User user;
+    public static DatabaseReference DBReference;
     public static StorageReference storageReference;
+    public static List<User> userList;
+    public static List<Publication> publicacionesList;
     FirebaseAuth auth;
+    NavController navController;
 
 
     @Override
@@ -53,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         setContentView(R.layout.activity_main);
 
         conectarFirebase();
-
+        cargarDatos();
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        NavController navController = navHostFragment.getNavController();
+        navController = navHostFragment.getNavController();
 
         view = findViewById(R.id.bottom_navigation);
         view.setOnNavigationItemSelectedListener(this);
@@ -105,7 +117,14 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         storageReference = FirebaseStorage.getInstance("gs://instagram-clone-a09bc.appspot.com").getReference("/image");
         databaseReference = database.getReference(REF_USER_DB);
         publicacionDBReference = database.getReference(REF_PUBLIC_DB);
+        DBReference = database.getReference();
 
+    }
+
+    public void cargarDatos(){
+        publicacionesList = new ArrayList<>();
+        userList = new ArrayList<>();
+        DBReference.addValueEventListener(this);
     }
 
     private void cargarUsuario(){
@@ -113,4 +132,61 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         //TODO: Login usuarios https://www.youtube.com/watch?v=IEc44_CxoyY&list=RDCMUCskTj1cdSSOeCjZXVm2QS9Q&index=2
     }
 
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if (snapshot.exists()){
+            for (DataSnapshot data : snapshot.getChildren()){
+                if (data.getKey().equals("Publicaciones")){
+                    for (DataSnapshot ds_pub : data.getChildren()){
+                        List<String> likes = new ArrayList<>();
+                        List<String> comentarios = new ArrayList<>();
+                        String id_publi = ds_pub.child("id_publicacion").getValue().toString();
+                        String imagen = ds_pub.child("imagen_publicacion").getValue().toString();
+                        String texto = ds_pub.child("texto_publicacion").getValue().toString();
+                        String user_prop_id = ds_pub.child("user_propietario").getValue().toString();
+                        for (DataSnapshot ds : ds_pub.child("Likes").getChildren()){
+                            String like = ds.getValue().toString();
+                            likes.add(like);
+                        }
+                        for (DataSnapshot ds2 : ds_pub.child("Comentarios").getChildren()){
+                            String comentario = ds2.getValue().toString();
+                            comentarios.add(comentario);
+                        }
+                        Publication p = new Publication(id_publi, user_prop_id, texto, likes, imagen, comentarios);
+                        publicacionesList.add(p);
+                    }
+                }
+                if (data.getKey().equals("User")){
+                    for (DataSnapshot ds : data.getChildren()){
+                        List<String> publi_ids_list = new ArrayList<>();
+                        List<String> amigos_ids_list = new ArrayList<>();
+                        String id_user = ds.child("id_usuario").getValue().toString();
+                        String username = ds.child("username").getValue().toString();
+                        String password = ds.child("password").getValue().toString();
+                        String name = ds.child("nombre_usuario").getValue().toString();
+                        String apellido = ds.child("apellidos_usuario").getValue().toString();
+                        String email = ds.child("email_usuario").getValue().toString();
+                        String descripcion = ds.child("descripcion_usuario").getValue().toString();
+                        String image = ds.child("imagen_usuario").getValue().toString();
+                        for (DataSnapshot dataPublic : ds.child("Publicaciones").getChildren()){
+                            String id_publi = dataPublic.getValue().toString();
+                            publi_ids_list.add(id_publi);
+                        }
+                        for (DataSnapshot dataAmigo : ds.child("Amigos").getChildren()){
+                            String id_amigo = dataAmigo.getValue().toString();
+                            amigos_ids_list.add(id_amigo);
+                        }
+                        User u = new User(id_user, username, password, name, apellido, image, email, publi_ids_list, descripcion, amigos_ids_list);
+                        userList.add(u);
+                    }
+                }
+            }
+        }
+        Toast.makeText(getBaseContext(), publicacionesList.size()+"", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
+    }
 }

@@ -131,7 +131,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         ref.child("Amigos").setValue(crearMapAmigos());
         ref.child("Publicaciones").setValue(crearMapPublicaciones()).addOnCompleteListener(this);
         getPublicaciones();
-        MainActivity.user = new User(ref.getKey(),username, password, name, surname, POR_DEFECTO_URL_IMAGE, email, url_publicationlist, publicationList, "");
+        MainActivity.userList.add(new User(ref.getKey(),username, password, name, surname, POR_DEFECTO_URL_IMAGE, email, url_publicationlist, publicationList, ""));
 
     }
 
@@ -141,14 +141,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
     private Map<String, String> crearMapAmigos(){
         Map<String, String> datosAmigos = new HashMap<>();
-        datosAmigos.put("id","-MZn49rmuaABnBwCJ7xq");
+        datosAmigos.put("admin","-MZn49rmuaABnBwCJ7xq");
         return datosAmigos;
     }
 
 
     private Map<String, String> crearMapPublicaciones(){
         Map<String, String> datosPublicaiones = new HashMap<>();
-        datosPublicaiones.put("id","-MZijMVqgkXEsLuvzL3F");
+        datosPublicaiones.put("publicacion1","-MZijMVqgkXEsLuvzL3F");
         return datosPublicaiones;
     }
 
@@ -198,9 +198,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }else {
             surnameLayout.setErrorEnabled(false);
             crearusuario(userVerify, passwordVerify, emailVerify, nameVerify, surnameVerify);
-            if (creado){
-                Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
-            }
+            Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
+
         }
 
     }
@@ -223,7 +222,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             userlist_creada = new ArrayList<String>();
             comentlist_creada = new ArrayList<>();
             String id = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("id_publicacion").getValue().toString();
-            String imagen = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("imagen_usuario").getValue().toString();
+            String imagen = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("imagen_publicacion").getValue().toString();
             String texto = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("texto_publicacion").getValue().toString();
             String user = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("user_propietario").getValue().toString();
             for (DataSnapshot ds : snapshot.child("-MZijMVqgkXEsLuvzL3F").child("Comentarios").getChildren()){
