@@ -131,27 +131,39 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         ref.setValue(datosUsuario);
         ref.child("Amigos").setValue(crearMapAmigos());
         ref.child("Publicaciones").setValue(crearMapPublicaciones()).addOnCompleteListener(this);
-        getPublicaciones();
-        actualizar();
+        getPublicaciones(ref.getKey());
+
         MainActivity.user = new User(ref.getKey(),username, password, name, surname, POR_DEFECTO_URL_IMAGE, email, "", publicationList, Arrays.asList("-MZn49rmuaABnBwCJ7xq"));
         crearRepo();
         return true;
     }
 
     private void crearRepo(){
-        MainActivity.user.setPublications_amigos(MainActivity.publicacionesList);
-
-    }
-
-    public void actualizar(){
-        for (int i = 0; i<=MainActivity.userList.size()-1; i++){
-            MainActivity.userList.remove(i);
+        List<Publication> p_l = new ArrayList<>();
+        for (String id_user : MainActivity.user.getIds_amigos_list()){
+            for(Publication p : MainActivity.publicacionesList){
+                if (p.getUser_propietario().equals(id_user)){
+                    p_l.add(p);
+                }
+            }
         }
-
+        MainActivity.user.setPublications_amigos(p_l);
     }
 
-    public void getPublicaciones(){
-        MainActivity.publicacionDBReference.addValueEventListener(this);
+
+    public void getPublicaciones(String id_user){
+        String texto = "Binvenido a Instagram!";
+        Map<String, String> datosPublicacion = new HashMap<>();
+        DatabaseReference ref = MainActivity.publicacionDBReference.push();
+        datosPublicacion.put("id_publicacion", ref.getKey());
+        datosPublicacion.put("imagen_publicacion", POR_DEFECTO_URL_IMAGE);
+        datosPublicacion.put("texto_publicacion", texto);
+        datosPublicacion.put("user_propietario", id_user);
+        ref.setValue(datosPublicacion);
+        ref.child("Likes").setValue(crearMapAmigos());
+        ref.child("Comentarios").setValue(crearMapPublicaciones()).addOnCompleteListener(this);
+        publicationList.add(new Publication(ref.getKey(), id_user, texto, new ArrayList<String>(), POR_DEFECTO_URL_IMAGE, new ArrayList<String>()));
+        //MainActivity.publicacionDBReference.addValueEventListener(this);
     }
 
     private Map<String, String> crearMapAmigos(){
@@ -237,7 +249,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {
         if (snapshot.exists()){
-            userlist_creada = new ArrayList<String>();
+
+            /*userlist_creada = new ArrayList<String>();
             comentlist_creada = new ArrayList<>();
             String id = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("id_publicacion").getValue().toString();
             String imagen = snapshot.child("-MZijMVqgkXEsLuvzL3F").child("imagen_publicacion").getValue().toString();
@@ -252,7 +265,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                 userlist_creada.add(username);
             }
             publicationList.add(new Publication(id, user, texto, userlist_creada, imagen, comentlist_creada));
-            url_publicationlist.add(id);
+            url_publicationlist.add(id);*/
         }
     }
 

@@ -126,7 +126,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     }
 
     private void crearRepo(){
-        MainActivity.user.setPublications_amigos(MainActivity.publicacionesList);
+        List<Publication> p_l = new ArrayList<>();
+        for (String id_user : MainActivity.user.getIds_amigos_list()){
+            for(Publication p : MainActivity.publicacionesList){
+                if (p.getUser_propietario().equals(id_user)){
+                    p_l.add(p);
+                }
+            }
+        }
+        MainActivity.user.setPublications_amigos(p_l);
     }
 
     private boolean logear(String name, String password){

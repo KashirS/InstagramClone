@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment{
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.home_to_chat:
-                Navigation.findNavController(getView()).navigate(R.id.action_homeFragment_to_chatFragment);
+                //Navigation.findNavController(getView()).navigate(R.id.action_homeFragment_to_chatFragment);
                 return true;
 
             default: return false;
