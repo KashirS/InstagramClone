@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.security.KeyStore;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,8 +62,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     boolean creado = false;
     List<String> userlist_creada;
     List<String> comentlist_creada;
-    List<String> url_publicationlist;
-    List<Publication> publicationList;
+    List<String> url_publicationlist = new ArrayList<>();
+    List<Publication> publicationList = new ArrayList<>();
     final String POR_DEFECTO_URL_IMAGE = "https://firebasestorage.googleapis.com/v0/b/instagram-clone-a09bc.appspot.com/o/image%2Fimagen_predeterminada.png?alt=media&token=b87d6c5d-34d7-4507-b0fc-616b83ec8bf8";
 
     @Override
@@ -116,7 +117,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
-    private void crearusuario(String username, String password, String email, String name, String surname){
+    private boolean crearusuario(String username, String password, String email, String name, String surname){
         Map<String, String> datosUsuario = new HashMap<>();
         DatabaseReference ref = MainActivity.databaseReference.push();
         datosUsuario.put("id_usuario", ref.getKey());
@@ -132,7 +133,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
         ref.child("Publicaciones").setValue(crearMapPublicaciones()).addOnCompleteListener(this);
         getPublicaciones();
         actualizar();
-        MainActivity.user_log_list.add(new User(ref.getKey(),username, password, name, surname, POR_DEFECTO_URL_IMAGE, email, url_publicationlist, publicationList, ""));
+        MainActivity.user = new User(ref.getKey(),username, password, name, surname, POR_DEFECTO_URL_IMAGE, email, "", publicationList, Arrays.asList("-MZn49rmuaABnBwCJ7xq"));
+        crearRepo();
+        return true;
+    }
+
+    private void crearRepo(){
+        MainActivity.user.setPublications_amigos(MainActivity.publicacionesList);
 
     }
 
@@ -205,9 +212,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
             surnameLayout.isEnabled();
         }else {
             surnameLayout.setErrorEnabled(false);
-            crearusuario(userVerify, passwordVerify, emailVerify, nameVerify, surnameVerify);
-            Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
-
+            boolean b = crearusuario(userVerify, passwordVerify, emailVerify, nameVerify, surnameVerify);
+            if (b){
+                Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_homeFragment);
+            }else {
+                Toast.makeText(getContext(), "Error creando el usuario", Toast.LENGTH_LONG).show();
+            }
         }
 
     }
@@ -241,8 +251,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
                 String username = dataS.getValue().toString();
                 userlist_creada.add(username);
             }
-            publicationList = new ArrayList<Publication>();
-            url_publicationlist = new ArrayList<String>();
             publicationList.add(new Publication(id, user, texto, userlist_creada, imagen, comentlist_creada));
             url_publicationlist.add(id);
         }
