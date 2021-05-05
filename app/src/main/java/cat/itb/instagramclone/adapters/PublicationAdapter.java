@@ -32,10 +32,10 @@ import cat.itb.instagramclone.models.Publication;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.ViewHolder>{
-    List<String> publicationList;
+    List<Publication> publicationList;
 
 
-    public PublicationAdapter(List<String> publicationList) {
+    public PublicationAdapter(List<Publication> publicationList) {
         this.publicationList = publicationList;
     }
 
@@ -48,7 +48,7 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String p = this.publicationList.get(position);
+        Publication p = this.publicationList.get(position);
         holder.bindData(p, holder.itemView.getContext());
     }
 
@@ -67,10 +67,6 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
         MaterialTextView texto_usuario;
         String imagen_user;
         String nombre_user;
-        String imagen_publi;
-        String texto_publi;
-        String id_propiet;
-        List<String> likes;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,38 +76,23 @@ public class PublicationAdapter extends RecyclerView.Adapter<PublicationAdapter.
             this.nombre_usuario_2 = itemView.findViewById(R.id.nombre_usuario_button_2);
             this.texto_usuario = itemView.findViewById(R.id.texto_usuario_textView);
             this.image_usuario_button = itemView.findViewById(R.id.imagen_usuario_button);
-            this.likes = new ArrayList<>();
         }
 
-        public void bindData(String p, Context context){
-            MainActivity.publicacionDBReference.child(p).addValueEventListener(this);
-            MainActivity.databaseReference.child(p).addValueEventListener(this);
+        public void bindData(Publication p, Context context){
+            MainActivity.databaseReference.child(p.getUser_propietario()).addValueEventListener(this);
             nombre_usuario.setText(nombre_user);
-            num_likes_publicacion.setText("Le ha gustado a " + likes.size() + " usuarios más.");
+            num_likes_publicacion.setText("Le ha gustado a " + p.getLikes_publicacion().size() + " usuarios más.");
             nombre_usuario_2.setText(nombre_user);
-            texto_usuario.setText(texto_publi);
+            texto_usuario.setText(p.getTexto_publicacion());
             Glide.with(context).load(imagen_user).fitCenter().centerCrop().into(image_usuario_button);
-            Glide.with(context).load(imagen_publi).fitCenter().centerCrop().into(imagen_publicacion);
+            Glide.with(context).load(p.getImagen_publicacion()).fitCenter().centerCrop().into(imagen_publicacion);
         }
 
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
             if (snapshot.exists()){
-                if (snapshot.getRef().getParent().getKey().equals("Publicaciones")){
-                    texto_publi = snapshot.child("texto_publicacion").getValue().toString();
-                    imagen_publi = snapshot.child("imagen_publicacion").getValue().toString();
-                    id_propiet = snapshot.child("user_propietario").getValue().toString();
-                    for (DataSnapshot s : snapshot.child("Likes").getChildren()){
-                        String like = s.getValue().toString();
-                        likes.add(like);
-                    }
-
-                }else{
-                    imagen_user = snapshot.child("imagen_usuario").getValue().toString();
-                    nombre_user = snapshot.child("username").getValue().toString();
-
-                }
-
+                imagen_user = snapshot.child("imagen_usuario").getValue().toString();
+                nombre_user = snapshot.child("username").getValue().toString();
             }
         }
 

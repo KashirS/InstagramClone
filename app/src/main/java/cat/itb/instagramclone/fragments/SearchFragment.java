@@ -43,7 +43,7 @@ public class SearchFragment extends Fragment {
         View v = inflater.inflate(R.layout.search_fragment, container, false);
         search_recyclerView = v.findViewById(R.id.search_recyclerView);
         search_recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
-        //search_recyclerView.setAdapter(new SearchAdapter(MainActivity.publicacionesList));
+        search_recyclerView.setAdapter(new SearchAdapter(MainActivity.publicacionesList));
 
         return v;
     }

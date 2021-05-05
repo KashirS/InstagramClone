@@ -88,9 +88,9 @@ public class HomeFragment extends Fragment{
         //story.setAdapter(new StoryAdapter());
         publicaciones_recyclerView = v.findViewById(R.id.home_publication_recyclerView);
         publicaciones_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        List<String> list = MainActivity.user.getPublicacionesAmigos();
-//        Toast.makeText(getContext(), MainActivity.user.getUsers_amigos_list().size(), Toast.LENGTH_LONG).show();
-        publicaciones_recyclerView.setAdapter(new PublicationAdapter(MainActivity.user.getUrl_publications_user()));
+        //List<String> list = MainActivity.user.getPublicacionesAmigos();
+        Toast.makeText(getContext(), ""+MainActivity.user.getPublications_amigos().size(), Toast.LENGTH_LONG).show();
+        publicaciones_recyclerView.setAdapter(new PublicationAdapter(MainActivity.user.getPublications_amigos()));
         return v;
     }
 
@@ -112,7 +112,5 @@ public class HomeFragment extends Fragment{
         }
 
     }
-//------------------------------------------------------------------------------------------------------
-
 
 }

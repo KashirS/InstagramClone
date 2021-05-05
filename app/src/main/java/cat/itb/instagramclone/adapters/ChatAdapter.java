@@ -35,7 +35,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Chat c = this.chatList.get(position);
         //Drawable image = holder.itemView.getContext().getResources().getDrawable(c.getUser_chat().getImagen_usuario());
-        //holder.bindData(c, image);
+        holder.bindData(c);
     }
 
     @Override
@@ -51,14 +51,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             user_chat_button = itemView.findViewById(R.id.user_chat_button);
-            //imageView = itemView.findViewById(R.id.chat_user_image);
-            //chat_user = itemView.findViewById(R.id.chat_chat);
+            imageView = itemView.findViewById(R.id.chat_user_image);
+            chat_user = itemView.findViewById(R.id.chat_chat);
         }
 
-        public void bindData(Chat chat,  Drawable drawable){
-            user_chat_button.setText(chat.getUser_chat().getNombre_usuario());
+        public void bindData(Chat chat){
+            user_chat_button.setText(chat.getUser_chat());
             //imageView.setImageDrawable(drawable);
-            //chat_user.setText(chat.getChat().get(0));
+            chat_user.setText(chat.getChat().get(chat.getChat().size()-1));
         }
     }
 }

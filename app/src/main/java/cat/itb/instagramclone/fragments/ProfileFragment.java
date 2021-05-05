@@ -56,17 +56,16 @@ public class ProfileFragment extends Fragment {
         num_user_follow = v.findViewById(R.id.num_user_follow);
         profile_image = v.findViewById(R.id.imagen_user_profile);
         profile_description = v.findViewById(R.id.profile_description);
-        profile_description.setText(MainActivity.userList.get(0).getDescripcion_user());
+        profile_description.setText(MainActivity.user.getDescripcion_user());
         profile_name = v.findViewById(R.id.nombre_user_profile);
-
         profile_name.setText(MainActivity.user.getUsername());
         Glide.with(getContext()).load(MainActivity.user.getImagen_usuario()).fitCenter().centerCrop().into(profile_image);
-        num_pub.setText(MainActivity.user.getUrl_publications_user().size()+"");
-        num_user_follower.setText(MainActivity.user.getIds_amigos_list().size()+"");
-        num_user_follow.setText(MainActivity.user.getIds_amigos_list().size()+"");
+        num_pub.setText(MainActivity.user.getPublications_user().size()+"");
+        num_user_follower.setText(MainActivity.user.getPublications_amigos().size()+"");
+        num_user_follow.setText(MainActivity.user.getPublications_amigos().size()+"");
         profile_recyclerView = v.findViewById(R.id.profile_recyclerView);
-        profile_recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
-        profile_recyclerView.setAdapter(new SearchAdapter(MainActivity.user.getUrl_publications_user()));
+        profile_recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        profile_recyclerView.setAdapter(new SearchAdapter(MainActivity.user.getPublications_user()));
         return v;
     }
 

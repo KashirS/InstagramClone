@@ -25,9 +25,9 @@ import cat.itb.instagramclone.models.Publication;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
-    List<String> publicationList;
+    List<Publication> publicationList;
 
-    public SearchAdapter(List<String> publicationList) {
+    public SearchAdapter(List<Publication> publicationList) {
         this.publicationList = publicationList;
     }
 
@@ -48,7 +48,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return this.publicationList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements ValueEventListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imagen_publicacion;
         Context c;
         public ViewHolder(@NonNull View itemView) {
@@ -56,27 +56,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             imagen_publicacion = itemView.findViewById(R.id.image_pub);
         }
 
-        public void bindData(String p, Context context){
+        public void bindData(Publication p, Context context){
             //TODO: Poner imagenes
             c = context;
-            MainActivity.publicacionDBReference.child(p).addValueEventListener(this);
-
-        }
-
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            if (snapshot.exists()){
-                String i = snapshot.child("imagen_publicacion").getValue().toString();
-                Glide.with(c)
-                        .load(i)
-                        .fitCenter()
-                        .centerCrop()
-                        .into(imagen_publicacion);
-            }
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
+            Glide.with(c).load(p.getImagen_publicacion()).fitCenter().centerCrop().into(imagen_publicacion);
 
         }
     }

@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         navController = navHostFragment.getNavController();
         view = findViewById(R.id.bottom_navigation);
         view.setOnNavigationItemSelectedListener(this);
-
         //TODO: https://es.stackoverflow.com/questions/254882/android-c%C3%B3mo-reducir-tama%C3%B1o-de-un-bitmap Usos bitmap sino URL
 
     }
@@ -127,9 +126,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         userList = new ArrayList<>();
         user_log_list = new ArrayList<>();
         users_DB_List = new ArrayList<>();
-
         DBReference.addValueEventListener(this);
-
     }
 
 
@@ -159,8 +156,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                 }
                 if (data.getKey().equals("User")){
                     for (DataSnapshot ds : data.getChildren()){
-                        List<String> publi_ids_list = new ArrayList<>();
-                        List<String> amigos_ids_list = new ArrayList<>();
+                        List<Publication> user_publicationList = new ArrayList<>();
+                        List<Publication> amigos_userlist = new ArrayList<>();
+                        List<String> ids_amigos_list = new ArrayList<>();
                         String id_user = ds.child("id_usuario").getValue().toString();
                         String username = ds.child("username").getValue().toString();
                         String password = ds.child("password").getValue().toString();
@@ -170,38 +168,51 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
                         String descripcion = ds.child("descripcion_usuario").getValue().toString();
                         String image = ds.child("imagen_usuario").getValue().toString();
                         for (DataSnapshot dataPublic : ds.child("Publicaciones").getChildren()){
+                            List<String> comentarios = new ArrayList<>();
+                            List<String> likes = new ArrayList<>();
                             String id_publi = dataPublic.getValue().toString();
-                            publi_ids_list.add(id_publi);
+                            String imagen_p = snapshot.child("Publicaciones").child(id_publi).child("imagen_publicacion").getValue().toString();
+                            String texto_p = snapshot.child("Publicaciones").child(id_publi).child("texto_publicacion").getValue().toString();
+                            String user_prop_p = snapshot.child("Publicaciones").child(id_publi).child("user_propietario").getValue().toString();
+                            for (DataSnapshot ds_c : snapshot.child("Publicaciones").child(id_publi).child("Comentarios").getChildren()){
+                                String com = ds_c.getValue().toString();
+                                comentarios.add(com);
+                            }
+                            for (DataSnapshot ds_1 : snapshot.child("Publicaciones").child(id_publi).child("Likes").getChildren()){
+                                String like = ds_1.getValue().toString();
+                                likes.add(like);
+                            }
+                            Publication pub = new Publication(id_publi, user_prop_p, texto_p, likes, imagen_p, comentarios);
+                            user_publicationList.add(pub);
                         }
                         for (DataSnapshot dataAmigo : ds.child("Amigos").getChildren()){
                             String id_amigo = dataAmigo.getValue().toString();
-                            amigos_ids_list.add(id_amigo);
-                        }
-                        User u = new User(id_user, username, password, name, apellido, image, email, publi_ids_list, descripcion, amigos_ids_list);
-                        userList.add(u);
-
-                    }
-
-                    for (User u : userList){
-                        List<Publication> p_l = new ArrayList<>();
-                        List<User> u_1 = new ArrayList<>();
-                        for (Publication p : publicacionesList){
-                            if (u.getId_usuario().equals(p.getUser_propietario())){
-                                p_l.add(p);
-                            }
-                        }
-                        for (String s : u.getUrl_publications_user()){
-                            for (User user : userList){
-                                if (user.getId_usuario().equals(s)){
-                                    u_1.add(user);
+                            ids_amigos_list.add(id_amigo);
+                            /*for (DataSnapshot data_publi : snapshot.child("Publicaciones").getChildren()){
+                                String user_prop = data_publi.child("user_propietario").getValue().toString();
+                                if (id_amigo.equals(user_prop)){
+                                    List<String> comentarios = new ArrayList<>();
+                                    List<String> likes = new ArrayList<>();
+                                    String id_publi = data_publi.child("id_publicacion").getValue().toString();
+                                    String texto_pub = data_publi.child("texto_publicacion").getValue().toString();
+                                    String imagen_pub = data_publi.child("imagen_publicacion").getValue().toString();
+                                    for (DataSnapshot ds_com : data_publi.child("Comentarios").getChildren()){
+                                        String com = ds_com.getValue().toString();
+                                        comentarios.add(com);
+                                    }
+                                    for (DataSnapshot ds_1 : data_publi.child("Likes").getChildren()){
+                                        String like = ds_1.getValue().toString();
+                                        likes.add(like);
+                                    }
+                                    Publication publi = new Publication(id_publi, id_amigo, texto_pub, likes, texto_pub, comentarios);
+                                    amigos_userlist.add(publi);
                                 }
-                            }
+                            }*/
+
                         }
-                        u.setUsers_amigos_list(u_1);
-                        u.setPublications_user(p_l);
+
+                        User u = new User(id_user, username, password, name, apellido, image, email, descripcion, user_publicationList, ids_amigos_list);
                         users_DB_List.add(u);
-                        //Toast.makeText(getBaseContext(), "ID: "+u.getUsername(), Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(getBaseContext(), "SIZE: "+u.getPublications_user().size(), Toast.LENGTH_LONG).show();
                     }
                 }
             }

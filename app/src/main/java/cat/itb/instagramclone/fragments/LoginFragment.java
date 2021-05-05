@@ -85,7 +85,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()){
             case R.id.login_button:
                 verifier();
-                Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
                 break;
             case R.id.register_button_login:
                 Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_registerFragment);
@@ -115,18 +114,30 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             log_name = usernameVerify;
             log_password = passwordVerify;
             guardarPreferencias(usernameVerify, passwordVerify);
-            logear(log_name, log_password);
-
+            boolean log = logear(log_name, log_password);
+            crearRepo();
+            if (log){
+                Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_homeFragment);
+            }else {
+                Toast.makeText(getContext(), "Error al logear", Toast.LENGTH_LONG).show();
+            }
         }
 
     }
 
-    private void logear(String name, String password){
+    private void crearRepo(){
+        MainActivity.user.setPublications_amigos(MainActivity.publicacionesList);
+    }
+
+    private boolean logear(String name, String password){
+        boolean b = false;
         for (User userDB : MainActivity.users_DB_List){
             if (userDB.getUsername().equals("@"+name) && userDB.getPassword().equals(password)){
                 MainActivity.user = userDB;
+                b = true;
             }
         }
+        return b;
     }
 
     private void cargarPreferencias(){

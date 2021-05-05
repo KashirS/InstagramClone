@@ -11,30 +11,27 @@ public class User {
     String apellidos_usuario;
     String imagen_usuario;
     String email_usuaio;
-    List<String> url_publications_user;
-    List<Publication> publications_user;
     String descripcion_user;
-    List<String> ids_amigos_list;
     List<User> users_amigos_list;
+    List<Publication> publications_user;
+    List<String> ids_amigos_list;
     List<Publication> publications_amigos;
 
-    public User(String id_usuario, String username, String password, String email, String nombre_usuario, String apellidos_usuario, List<String> url_publications_user) {
+    List<String> url_publications_user;
+
+
+    public User(String id_usuario, String username, String password, String nombre_usuario, String apellidos_usuario, String imagen_usuario, String email_usuaio, String descripcion_user, List<Publication> publications_user, List<String> ids_amigos_list) {
         this.id_usuario = id_usuario;
         this.username = username;
         this.password = password;
-        this.email_usuaio = email;
         this.nombre_usuario = nombre_usuario;
         this.apellidos_usuario = apellidos_usuario;
-        this.url_publications_user = url_publications_user;
-    }
-
-    public User(String username, String password, String email, String nombre_usuario, String apellidos_usuario, List<String> url_publications_user) {
-        this.username = username;
-        this.password = password;
-        this.email_usuaio = email;
-        this.nombre_usuario = nombre_usuario;
-        this.apellidos_usuario = apellidos_usuario;
-        this.url_publications_user = url_publications_user;
+        this.imagen_usuario = imagen_usuario;
+        this.email_usuaio = email_usuaio;
+        this.descripcion_user = descripcion_user;
+        this.publications_user = publications_user;
+        this.ids_amigos_list = ids_amigos_list;
+        this.publications_amigos = new ArrayList<>();
     }
 
     public User(String id_usuario, String username, String password, String nombre_usuario, String apellidos_usuario, String imagen_usuario, String email_usuaio, List<String> url_publications_user, List<Publication> publications_user, String descripcion_user) {
@@ -54,33 +51,7 @@ public class User {
 
     }
 
-    public User(String id_usuario, String username, String password, String nombre_usuario, String apellidos_usuario, String imagen_usuario, String email_usuaio, List<String> url_publications_user, List<Publication> publications_user, String descripcion_user, List<String> ids_amigos_list, List<Publication> publications_amigos) {
-        this.id_usuario = id_usuario;
-        this.username = username;
-        this.password = password;
-        this.nombre_usuario = nombre_usuario;
-        this.apellidos_usuario = apellidos_usuario;
-        this.imagen_usuario = imagen_usuario;
-        this.email_usuaio = email_usuaio;
-        this.url_publications_user = url_publications_user;
-        this.publications_user = publications_user;
-        this.descripcion_user = descripcion_user;
-        this.ids_amigos_list = ids_amigos_list;
-        this.publications_amigos = publications_amigos;
-    }
 
-    public User(String id_usuario, String username, String password, String nombre_usuario, String apellidos_usuario, String imagen_usuario, String email_usuaio, List<String> url_publications_user, String descripcion_user, List<String> ids_amigos_list) {
-        this.id_usuario = id_usuario;
-        this.username = username;
-        this.password = password;
-        this.nombre_usuario = nombre_usuario;
-        this.apellidos_usuario = apellidos_usuario;
-        this.imagen_usuario = imagen_usuario;
-        this.email_usuaio = email_usuaio;
-        this.url_publications_user = url_publications_user;
-        this.descripcion_user = descripcion_user;
-        this.ids_amigos_list = ids_amigos_list;
-    }
 
     public List<String> getPublicacionesAmigos(){
         List<String> lista = new ArrayList<>();
